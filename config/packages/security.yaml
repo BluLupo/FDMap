@@ -21,6 +21,7 @@ security:
             # https://symfony.com/doc/current/security/form_login_setup.html
 
     access_control:
+        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
 

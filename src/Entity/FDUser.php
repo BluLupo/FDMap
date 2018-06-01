@@ -28,12 +28,12 @@ class FDUser implements UserInterface, \Serializable
 	private $password;
 
 	/**
-	 * @ORM\Column(name="latitude", type="string")
+	 * @ORM\Column(name="latitude", type="string", nullable=true)
 	 */
 	private $latitude;
 
 	/**
-	 * @ORM\Column(name="longitude", type="string")
+	 * @ORM\Column(name="longitude", type="string", nullable=true)
 	 */
 	private $longitude;
 
@@ -44,12 +44,7 @@ class FDUser implements UserInterface, \Serializable
 
 	public function getUsername()
     {
-        return $this->password;
-    }
-
-	public function getPassword()
-    {
-        return $this->password;
+        return $this->nickname;
     }
 
     public function getRoles()
@@ -83,5 +78,29 @@ class FDUser implements UserInterface, \Serializable
             // see section on salt below
             // $this->salt
         ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    public function getNickname()
+    {
+        return $this->nickname;
+    }
+
+    public function setNickname($nickname)
+    {
+        $this->nickname = $nickname;
+
+        return $this;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
     }
 }

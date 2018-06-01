@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<serializer>
+    <class name="App\Entity\FDBot" exclusion-policy="ALL">
+    	<property name="latitude" expose="true">
+    		<groups>
+    			<value>marker</value>
+    		</groups>
+    	</property>
+    	<property name="latitude" expose="true">
+    		<groups>
+    			<value>marker</value>
+    		</groups>
+    	</property>
+    </class>
+</serializer>

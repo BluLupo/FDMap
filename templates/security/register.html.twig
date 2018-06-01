@@ -1,7 +1,24 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('build/app.css') }}" rel="stylesheet" />
+{% endblock %}
+
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+	<div class='login-page'>
+        <div class='form'>
+            <div class='form-title'>
+                Registra account
+            </div>
+            <div class ="login-form">
+			    {{ form_start(form) }}
+			    {{ form_widget(form) }}
+			    {{ form_end(form) }}
+			</div>
+		</div>
+	</div>
+	<div class='footer'> 
+            powered by <img src=" {{ asset('images/logo.png') }}" width="60" height="60"/>
+        </div>
 {% endblock %}

@@ -1,22 +1,27 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+    
 {% block body %}
     {% if error %}
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
-    <form action="{{ path('login') }}" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password" />
-
-        {#
-            If you want to control the URL the user
-            is redirected to on success (more details below)
-            <input type="hidden" name="_target_path" value="/account" />
-        #}
-
-        <button type="submit">login</button>
-    </form>
+    <div class='login-page'>
+        <div class='form'>
+            <div class='form-title'>
+                Login
+            </div>
+            <form  class ="login-form" action="{{ path('login') }}" method="post">
+                <input name="_username" type="text" placeholder="Nome utente"/>
+                <input name="_password" type="password" placeholder="Password"/>
+                <button>login</button>
+                <p class="message">Non hai un account? <a href="{{ path('register') }}">Creane uno!</a></p>
+            </form>
+        </div>
+    </div>
+    <div class='footer'> 
+            powered by <img src=" {{ asset('images/logo.png') }}" width="60" height="60"/>
+        </div>
 {% endblock %}

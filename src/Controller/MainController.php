@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 class MainController extends Controller
 {
 	/**
-	 * @Route("/")
+	 * @Route("/map", name="map")
 	 */
 	public function mainAction(Request $request)
 	{

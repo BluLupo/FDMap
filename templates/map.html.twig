@@ -1,16 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
+	{{ parent() }}
 	<style>
       	#map {
-        	height: 400px;
-        	width: 100%;
+        	position: absolute;
+    		top:0px;
+		   	bottom: 0;
+		    width: 100%;
     	}
     </style>
 {% endblock %}
 
-{% block map %}
-	<div id="map">
+{% block body %}
+	<div class="main" id="map">
+	</div>
+	<div class="sidenav">
+			<a href="#about">Aggiungi marker</a>
+			<a href="#services">Logout</a>
+			<div class="sidebarlogo">
+			<img src=" {{ asset('images/logo.png') }}" width="60" height="60"/>
+		</div>
 	</div>
 {% endblock %}
 

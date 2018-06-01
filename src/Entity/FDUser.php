@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity;
+ * @ORM\Entity
+ * @UniqueEntity("nickname")
  */
 class FDUser implements UserInterface, \Serializable
 {
@@ -18,14 +21,16 @@ class FDUser implements UserInterface, \Serializable
 	private $id;
 
 	/**
-	 * @ORM\Column(name="nickname", type="string")
+	 * @ORM\Column(unique=true, name="nickname", type="string")
 	 */
 	private $nickname;
 
 	/**
-	 * @ORM\Column(name="password", type="string")
+	 * @ORM\Column(name="password", type="string", length=64)
 	 */
 	private $password;
+
+    private $password2;
 
 	/**
 	 * @ORM\Column(name="latitude", type="string", nullable=true)
@@ -61,7 +66,7 @@ class FDUser implements UserInterface, \Serializable
     {
         return serialize(array(
             $this->id,
-            $this->username,
+            $this->nickname,
             $this->password,
             // see section on salt below
             // $this->salt,
@@ -73,7 +78,7 @@ class FDUser implements UserInterface, \Serializable
     {
         list (
             $this->id,
-            $this->username,
+            $this->nickname,
             $this->password,
             // see section on salt below
             // $this->salt
@@ -102,5 +107,25 @@ class FDUser implements UserInterface, \Serializable
         $this->password = $password;
 
         return $this;
+    }
+
+    public function getPassword2()
+    {
+        return $this->password2;
+    }
+
+    public function setPassword2($password2)
+    {
+        $this->password2 = $password2;
+
+        return $this;
+    }
+
+    /**
+     * @Assert\IsTrue(message="Le password non corrispondono")
+     */
+    public function isPasswordEqual()
+    {
+        return $this->password === $this->password2;
     }
 }

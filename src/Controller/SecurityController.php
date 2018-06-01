@@ -3,14 +3,26 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
+
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use App\Entity\FDUser;
 use Symfony\Component\Form\Extension\Core\Type;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+
+use App\Entity\FDUser;
+
 
 class SecurityController extends Controller
 {
+    /**
+     * @Route("/test", name="test")
+     */
+    public function test()
+    {
+        return $this->render('base.html.twig');
+    }
+
 	/**
      * @Route("/login", name="login")
      */
@@ -35,15 +47,23 @@ class SecurityController extends Controller
     {
     	$em = $this->getDoctrine()->getManager();
     	$user = new FDUser();
+    	$encoder = $this->container->get('security.password_encoder');
+
     	$form = $this->createFormBuilder($user)
     		->add('nickname', Type\TextType::class)
     		->add('password', Type\PasswordType::class)
-    		->add('submit', Type\SubmitType::class)
+            ->add('password2', Type\PasswordType::class, array(
+                'label' => "Ripeti password"
+            ))
+    		->add('submit', Type\SubmitType::class, array(
+                'label' => "Registra"
+            ))
     		->getForm();
 
     	$form->handleRequest($request);
     	if($form->isSubmitted() && $form->isValid()) 
     	{
+    		$user->setPassword($encoder->encodePassword($user, $user->getPassword()));
     		$em->persist($user);
     		$em->flush();
     		return $this->redirectToRoute("login");

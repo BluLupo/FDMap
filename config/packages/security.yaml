@@ -1,13 +1,21 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory: { memory: ~ }
+        pgsql:
+            entity:
+                class: App\Entity\FDUser
+                property: nickname
+
     firewalls:
         main:
+            pattern:    ^/
+            http_basic: ~
+            provider: pgsql
             anonymous: ~
             form_login:
                 login_path: login
                 check_path: login
+                default_target_path: map
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -26,5 +34,6 @@ security:
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
 
     encoders:
-        App\Entity\User:
+        App\Entity\FDUser:
             algorithm: bcrypt
+            cost: 15

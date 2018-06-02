@@ -1,5 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
+.container {
+  padding-top:1%;
+}
+
 .fd_modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */

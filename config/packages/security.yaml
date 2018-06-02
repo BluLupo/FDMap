@@ -29,6 +29,8 @@ security:
             # https://symfony.com/doc/current/security/form_login_setup.html
 
     access_control:
+        - { path: /_wdt/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }  ### These 2 lines needed
+        - { path: /_profiler/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }

@@ -6,7 +6,12 @@
     
 {% block body %}
     {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div class="container">
+            <div class="alert alert-danger fade in alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+        </div>
     {% endif %}
     <div class='fd_login-page'>
         <div class='fd_form'>

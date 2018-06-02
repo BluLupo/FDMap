@@ -9,8 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @UniqueEntity(
- *     fields={"nickname", "email"},
+ * @UniqueEntity(fields= "nickname", message="Nickname già registrato")
+ * @UniqueEntity(fields= "email", message="Email già registrata")
  * )
  */
 class FDUser implements UserInterface, \Serializable
@@ -140,7 +140,7 @@ class FDUser implements UserInterface, \Serializable
      */
     public function isPasswordEqual()
     {
-        return $this->markers=== $this->markers;
+        return $this->password === $this->password2;
     }
 
     public function setMarker($marker)

@@ -18,8 +18,11 @@ class MainController extends Controller
 	{
 		$marker = new Marker;
 		$form = $this->createForm(MarkerType::class, $marker);
+		$marker = $this->getUser()->getMarker();
+		$marked = isset($marker);
 		return $this->render("map.html.twig", array(
-			"form" => $form->createView()
+			"form" => $form->createView(),
+			"marked" => $marked
 		));
 	}
 }

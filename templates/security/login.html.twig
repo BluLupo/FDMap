@@ -8,20 +8,17 @@
     {% if error %}
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
-    <div class='login-page'>
-        <div class='form'>
-            <div class='form-title'>
-                Login
+    <div class='fd_login-page'>
+        <div class='fd_form'>
+            <div class='fd_form-logo'> 
+                <div><img style="vertical-align:middle;" src=" {{ asset('images/logo.png') }}" width="150" height="150"/></div>
             </div>
-            <form  class ="login-form" action="{{ path('login') }}" method="post">
-                <input name="_username" type="text" placeholder="Nome utente"/>
+            <form  class="fd_login-form" action="{{ path('login') }}" method="post">
+                <input name="_username" type="text" placeholder="Nickname"/>
                 <input name="_password" type="password" placeholder="Password"/>
                 <button>login</button>
-                <p class="message">Non hai un account? <a href="{{ path('register') }}">Creane uno!</a></p>
+                <p class="fd_message">Non hai un account? <a href="{{ path('register') }}">Creane uno!</a></p>
             </form>
         </div>
     </div>
-    <div class='footer'> 
-            powered by <img src=" {{ asset('images/logo.png') }}" width="60" height="60"/>
-        </div>
 {% endblock %}

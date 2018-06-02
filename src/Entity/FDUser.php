@@ -9,7 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @UniqueEntity("nickname")
+ * @UniqueEntity(
+ *     fields={"nickname", "email"},
+ * )
  */
 class FDUser implements UserInterface, \Serializable
 {
@@ -25,6 +27,11 @@ class FDUser implements UserInterface, \Serializable
 	 */
 	private $nickname;
 
+    /**
+     * @ORM\Column(unique=true, name="email", type="string")
+     */
+    private $email;
+
 	/**
 	 * @ORM\Column(name="password", type="string", length=64)
 	 */
@@ -33,14 +40,9 @@ class FDUser implements UserInterface, \Serializable
     private $password2;
 
 	/**
-	 * @ORM\Column(name="latitude", type="string", nullable=true)
+	 * @ORM\OneToOne(targetEntity="Marker", mappedBy="user")
 	 */
-	private $latitude;
-
-	/**
-	 * @ORM\Column(name="longitude", type="string", nullable=true)
-	 */
-	private $longitude;
+	private $marker;
 
 	public function getSalt()
 	{
@@ -97,6 +99,18 @@ class FDUser implements UserInterface, \Serializable
         return $this;
     }
 
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
     public function getPassword()
     {
         return $this->password;
@@ -126,6 +140,18 @@ class FDUser implements UserInterface, \Serializable
      */
     public function isPasswordEqual()
     {
-        return $this->password === $this->password2;
+        return $this->markers=== $this->markers;
+    }
+
+    public function setMarker($marker)
+    {
+        $this->marker->$marker;
+
+        return $this;
+    } 
+
+    public function getMarker()
+    {
+        return $this->marker;
     }
 }

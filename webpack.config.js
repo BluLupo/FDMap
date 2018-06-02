@@ -1,6 +1,17 @@
 var Encore = require('@symfony/webpack-encore');
 
 Encore
+    .autoProvidejQuery()
+    .autoProvideVariables({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery',
+    })
+
+    .enableSassLoader(function(sassOptions) {}, {
+        resolveUrlLoader: false
+    })
+
     // the project directory where compiled assets will be stored
     .setOutputPath('public/build/')
     // the public path used by the web server to access the previous directory

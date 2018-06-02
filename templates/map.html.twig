@@ -13,25 +13,141 @@
 {% endblock %}
 
 {% block body %}
-	<div class="main" id="map">
+	<div class="fd_main" id="map">
 	</div>
-	<div class="sidenav">
-			<a href="#about">Aggiungi marker</a>
-			<a href="#services">Logout</a>
-			<div class="sidebarlogo">
+	<div class="fd_sidenav">
+		<p data-toggle="modal" data-target="#addModal">Aggiungi marker</p>
+		<p data-toggle="modal" data-target="#editModal">Sposta marker</p>
+		<p id="logout">Logout</p>
+		<div class="fd_sidebarlogo">
 			<img src=" {{ asset('images/logo.png') }}" width="60" height="60"/>
 		</div>
 	</div>
+	<div class="modal fade" id="addModal" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+		    <div class="modal-content">
+		        <div class="modal-header">
+		          	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		          	<h4 class="modal-title">Aggiungi nuovo marker</h4>
+		        </div>
+		        <div class="modal-body">
+		        	<p>Sei sicuro di voler impostare il marker corrente come tua posizione attuale?<p>
+		        	<p>Ricorda! Anche gli altri utenti potranno vedere questa posizione</p>
+		        </div>
+		        <div class="modal-footer">
+		          	<button type="button" class="btn btn-default" onclick="saveMarker()" data-dismiss="modal">Confirm</button>
+		          	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		    </div>
+	    </div>
+	  </div>
+	  <div class="modal fade" id="editModal" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+		    <div class="modal-content">
+		        <div class="modal-header">
+		          	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		          	<h4 class="modal-title">Sposta marker</h4>
+		        </div>
+		        <div class="modal-body">
+		        	<p>Sei sicuro di voler spostare il tuo marker?<p>
+		        </div>
+		        <div class="modal-footer">
+		          	<button type="button" class="btn btn-default" onclick="editMarker()" data-dismiss="modal">Confirm</button>
+		          	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		    </div>
+	    </div>
+	  </div>
 {% endblock %}
 
 {% block javascripts %}
 	<script>
+		var previousMarker = null;
+		var map = null;
 		function initMap() {
-		  var uluru = {lat: 41.890251, lng: 12.492373};
-		  var map = new google.maps.Map(
-		      document.getElementById('map'), {zoom: 4, center: uluru});
-		  var marker = new google.maps.Marker({position: uluru, map: map});
-		}
+
+        	map = new google.maps.Map(document.getElementById('map'), {
+          				zoom: 6,
+          				center: {lat: 41.5325, lng: 12.2858 
+          			}
+          		}
+          	);
+			$.ajax({
+                url:'{{ (path('get_all_markers')) }}',
+                type: "GET",
+                dataType: "json",
+                async: true,
+                success: function (data)
+                {
+                    data.forEach(function(elem) {
+                    	var infowindow = new google.maps.InfoWindow({
+				          	content: elem.nickname
+				        });
+                    	var marker = new google.maps.Marker({
+				          position: {lat: Number(elem.latitude), lng: Number(elem.longitude)},
+				          map: map,
+				        });
+				         marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+				        marker.addListener('click', function() {
+				          infowindow.open(map, marker);
+				        });
+                    });
+                }
+            });
+
+
+	        map.addListener('click', function(e) {
+	          	placeMarkerAndPanTo(e.latLng, map);
+	        });
+      	}
+
+	    function placeMarkerAndPanTo(latLng, map) {
+	    	if (previousMarker)
+        		previousMarker.setMap(null);
+		    previousMarker = new google.maps.Marker({
+	        	position: latLng,
+	        	map: map
+	      	});
+	        map.panTo(latLng);
+	    }
+
+	    function saveMarker() {
+	    	$.ajax({
+                url:'{{ (path('add_marker')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                	latitude: previousMarker.getPosition().lat(),
+                	longitude: previousMarker.getPosition().lng()
+                },
+                async: true,
+                success: function (data)
+                {
+                   location.reload();
+                }
+            });
+	    }
+
+	    function editMarker() {
+	    	$.ajax({
+                url:'{{ (path('edit_marker')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                	latitude: previousMarker.getPosition().lat(),
+                	longitude: previousMarker.getPosition().lng()
+                },
+                async: true,
+                success: function (data)
+                {
+                   location.reload();
+                }
+            });
+	    }
     </script>
     <script async defer
    		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyEDy7B__fUUmJsMDaoLGUrClpCmbQPic&callback=initMap">

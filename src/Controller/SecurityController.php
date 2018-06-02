@@ -50,10 +50,29 @@ class SecurityController extends Controller
     	$encoder = $this->container->get('security.password_encoder');
 
     	$form = $this->createFormBuilder($user)
-    		->add('nickname', Type\TextType::class)
-    		->add('password', Type\PasswordType::class)
+    		->add('nickname', Type\TextType::class, array(
+                'required' => true,
+                'attr' => array(
+                    'placeholder' => "Nickname"                
+                )
+            ))
+            ->add('email', Type\TextType::class, array(
+                'required' => true,
+                'attr' => array(
+                    'placeholder' => "Email"                
+                )
+            ))
+    		->add('password', Type\PasswordType::class, array(
+                'required' => true,
+                'attr' => array(
+                    'placeholder' => "Password"
+                )
+            ))
             ->add('password2', Type\PasswordType::class, array(
-                'label' => "Ripeti password"
+                'required' => true,
+                'attr' => array(
+                    'placeholder' => "Ripeti password"
+                )
             ))
     		->add('submit', Type\SubmitType::class, array(
                 'label' => "Registra"

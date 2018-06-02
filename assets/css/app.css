@@ -1,15 +1,69 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
-.footer {
-  font-family: "Roboto", sans-serif;
-  position: fixed;
-  left: 50%;
-  bottom: 20px;
-  transform: translate(-50%, -50%);
-  margin: 0 auto;
+.fd_modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-.sidebarlogo {
+/* Modal Content */
+.fd_modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.fd_close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.fd_close:hover,
+.fd_close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.fd_modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+.fd_modal-body {padding: 2px 16px;}
+
+.fd_sidebarlogo {
   position: absolute;
   left: 50%;
   bottom: 20px;
@@ -17,10 +71,10 @@
   margin: 0 auto;
 }
 
-.sidenav {
+.fd_sidenav {
     font-family: "Roboto", sans-serif;
     height: 100%;
-    width: 160px;
+    width: 10%;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -30,7 +84,7 @@
     padding-top: 20px;
 }
 
-.sidenav a {
+.fd_sidenav p {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 25px;
@@ -38,14 +92,12 @@
     display: block;
 }
 
-.sidenav a:hover {
+.fd_sidenav p:hover {
     color: #ffffff;
 }
 
-.main {
-    margin-left: 160px; /* Same as the width of the sidenav */
-    font-size: 28px; /* Increased text to enable scrolling */
-    padding: 0px 10px;
+.fd_main {
+    width: 90%;
 }
 
 @media screen and (max-height: 450px) {
@@ -53,17 +105,17 @@
     .sidenav a {font-size: 18px;}
 }
 
-.login-page {
+.fd_login-page {
   width: 360px;
   padding: 8% 0 0;
   margin: auto;
 }
-.form-title {
+.fd_form-logo {
   font-size:24px;
   padding: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
-.form {
+.fd_form {
   position: relative;
   z-index: 1;
   background: #FFFFFF;
@@ -73,7 +125,7 @@
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
-.form input {
+.fd_form input {
   font-family: "Roboto", sans-serif;
   outline: 0;
   background: #f2f2f2;
@@ -84,7 +136,7 @@
   box-sizing: border-box;
   font-size: 14px;
 }
-.form button {
+.fd_form button {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
@@ -98,52 +150,52 @@
   transition: all 0.3 ease;
   cursor: pointer;
 }
-.form button:hover,.form button:active,.form button:focus {
+.fd_form button:hover,.form button:active,.form button:focus {
   background: #1a4c8a;
 }
-.form .message {
+.fd_form .fd_message {
   margin: 15px 0 0;
   color: #6baeff;
   font-size: 12px;
 }
-.form .message a {
+.fd_form .fd_message a {
   color: #1a4c8a;
   text-decoration: none;
 }
-.form .register-form {
+.fd_form .fd_register-form {
   display: none;
 }
-.container {
+.fd_container {
   position: relative;
   z-index: 1;
   max-width: 300px;
   margin: 0 auto;
 }
-.container:before, .container:after {
+.fd_container:before, .fd_container:after {
   content: "";
   display: block;
   clear: both;
 }
-.container .info {
+.fd_container .info {
   margin: 50px auto;
   text-align: center;
 }
-.container .info h1 {
+.fd_container .info h1 {
   margin: 0 0 15px;
   padding: 0;
   font-size: 36px;
   font-weight: 300;
   color: #1a1a1a;
 }
-.container .info span {
+.fd_container .info span {
   color: #4d4d4d;
   font-size: 12px;
 }
-.container .info span a {
+.fd_container .fd_info span a {
   color: #000000;
   text-decoration: none;
 }
-.container .info span .fa {
+.fd_container .fd_info span .fa {
   color: #EF3B3A;
 }
 body {

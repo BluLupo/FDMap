@@ -6,19 +6,19 @@
 {% endblock %}
 
 {% block body %}
-	<div class='login-page'>
-        <div class='form'>
-            <div class='form-title'>
-                Registra account
+	<div class='fd_login-page'>
+        <div class='fd_form'>
+            <div class='fd_form-logo'> 
+                <div><img style="vertical-align:middle;" src=" {{ asset('images/logo.png') }}" width="150" height="150"/></div>
             </div>
-            <div class ="login-form">
+            <div class="fd_login-form">
 			    {{ form_start(form) }}
-			    {{ form_widget(form) }}
+			    {{ form_widget(form.nickname) }}
+                {{ form_widget(form.email) }}
+                {{ form_widget(form.password) }}
+                {{ form_widget(form.password2) }}
 			    {{ form_end(form) }}
 			</div>
 		</div>
 	</div>
-	<div class='footer'> 
-            powered by <img src=" {{ asset('images/logo.png') }}" width="60" height="60"/>
-        </div>
 {% endblock %}

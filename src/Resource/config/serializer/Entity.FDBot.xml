@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <serializer>
-    <class name="App\Entity\FDBot" exclusion-policy="ALL">
+    <class name="App\Entity\Marker" exclusion-policy="ALL">
     	<property name="latitude" expose="true">
     		<groups>
-    			<value>marker</value>
+    			<value>markers</value>
     		</groups>
     	</property>
     	<property name="latitude" expose="true">
     		<groups>
-    			<value>marker</value>
+    			<value>markers</value>
     		</groups>
     	</property>
+        <virtual-property name="nickname" expression="object.getUser().getNickname()" serialized-name="nickname" expose="true">
+            <groups>
+                <value>markers</value>
+            </groups>
+        </virtual-property>
     </class>
 </serializer>

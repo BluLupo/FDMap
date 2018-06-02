@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\MarkerType;
+use App\Entity\Marker;
 
 class MainController extends Controller
 {
@@ -14,6 +16,10 @@ class MainController extends Controller
 	 */
 	public function mainAction(Request $request)
 	{
-		return $this->render("map.html.twig");
+		$marker = new Marker;
+		$form = $this->createForm(MarkerType::class, $marker);
+		return $this->render("map.html.twig", array(
+			"form" => $form->createView()
+		));
 	}
 }

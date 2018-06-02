@@ -16,6 +16,9 @@ security:
                 login_path: login
                 check_path: login
                 default_target_path: map
+            logout:
+                path:   /logout
+                target: /
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false

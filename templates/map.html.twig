@@ -18,7 +18,7 @@
 	<div class="fd_sidenav">
 		<p data-toggle="modal" data-target="#addModal">Aggiungi marker</p>
 		<p data-toggle="modal" data-target="#editModal">Sposta marker</p>
-		<p id="logout">Logout</p>
+		<p onclick="logout()" id="logout">Logout</p>
 		<div class="fd_sidebarlogo">
 			<img src=" {{ asset('images/logo.png') }}" width="60" height="60"/>
 		</div>
@@ -147,6 +147,10 @@
                    location.reload();
                 }
             });
+	    }
+
+	    function logout() {
+	    	document.location.href = "/logout";
 	    }
     </script>
     <script async defer

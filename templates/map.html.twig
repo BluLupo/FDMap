@@ -60,8 +60,27 @@
 		        	<p>Sei sicuro di voler spostare il tuo marker?<p>
 		        </div>
 		        <div class="modal-footer">
-		          	<button type="button" class="btn btn-success" onclick="deleteMarker()" data-dismiss="modal">Confirm</button>
-		          	<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		          	<button type="button" class="btn btn-success" onclick="editMarker()" data-dismiss="modal">Conferma</button>
+		          	<button type="button" class="btn btn-danger" data-dismiss="modal">Annulla</button>
+		        </div>
+		    </div>
+	    </div>
+	  </div>
+	  <div class="modal fade" id="deleteModal" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+		    <div class="modal-content">
+		        <div class="modal-header">
+		          	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		          	<h4 class="modal-title">Rimuovi marker</h4>
+		        </div>
+		        <div class="modal-body">
+		        	<p>Sei sicuro di voler eliminare il tuo marker?<p>
+		        </div>
+		        <div class="modal-footer">
+		          	<button type="button" class="btn btn-danger" onclick="deleteMarker()" data-dismiss="modal">Conferma</button>
+		          	<button type="button" class="btn btn-success" data-dismiss="modal">Annulla</button>
 		        </div>
 		    </div>
 	    </div>
@@ -87,6 +106,7 @@
                 async: true,
                 success: function (data)
                 {
+                	var nickname = '{{ nickname }}';
                     data.forEach(function(elem) {
                     	var infowindow = new google.maps.InfoWindow({
 				          	content: elem.nickname
@@ -95,7 +115,12 @@
 				          position: {lat: Number(elem.latitude), lng: Number(elem.longitude)},
 				          map: map,
 				        });
-				         marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+				        if(elem.nickname == nickname) {
+				         	marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+				        } else {
+				        	marker.setIcon('http://maps.google.com/mapfiles/ms/icons/purple-dot.png')
+
+				        }
 				        marker.addListener('click', function() {
 				          infowindow.open(map, marker);
 				        });
@@ -116,6 +141,7 @@
 	        	position: latLng,
 	        	map: map
 	      	});
+			previousMarker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
 	        map.panTo(latLng);
 	    }
 
@@ -151,7 +177,20 @@
                    location.reload();
                 }
             });
-	    }
+        }
+
+        function deleteMarker() {
+	    	$.ajax({
+                url:'{{ (path('delete_marker')) }}',
+                type: "POST",
+                dataType: "json",
+                async: true,
+                success: function (data)
+                {
+                   location.reload();
+                }
+            });
+        }
 
 	    function logout() {
 	    	document.location.href = "/logout";

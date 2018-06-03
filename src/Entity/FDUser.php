@@ -145,7 +145,7 @@ class FDUser implements UserInterface, \Serializable
 
     public function setMarker($marker)
     {
-        $this->marker->$marker;
+        $this->marker = $marker;
 
         return $this;
     } 

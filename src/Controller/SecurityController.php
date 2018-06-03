@@ -82,22 +82,21 @@ class SecurityController extends Controller
     	$form->handleRequest($request);
         if($form->isSubmitted())
         {
-            $errors = $form->getErrors(true);
-
-            foreach($errors as $error) 
-            {
-                dump($error);
-                $this->addFlash('notice' , $error->getMessage());
-            }
-            /*
             if($form->isValid()) 
             {
                 $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
                 $em->persist($user);
                 $em->flush();
+    		    return $this->redirectToRoute("login");
             } else {
+                $errors = $form->getErrors(true);
+
+                foreach($errors as $error) 
+                {
+                    dump($error);
+                    $this->addFlash('notice' , $error->getMessage());
+                }
             }
-    		return $this->redirectToRoute("login");*/
     	}
 
     	return $this->render('security/register.html.twig', array(

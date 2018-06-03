@@ -76,4 +76,22 @@ class MarkerController extends Controller
 
 		return new JsonResponse(array("success" => true));
 	}
+
+	/**
+	 * @Route("/delete", name="delete_marker")
+	 */
+	public function deleteMarkerAction(Request $request)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		$postData = $request->request->all();
+		$user = $this->getUser();
+		$marker = $user->getMarker();
+
+		$user->setMarker(null);
+		$em->remove($marker);
+		$em->flush();
+
+		return new JsonResponse(array("success" => true));
+	}
 }

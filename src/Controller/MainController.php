@@ -19,7 +19,8 @@ class MainController extends Controller
 		$marked = isset($marker);
 		return $this->render("map.html.twig", array(
 			"form" => $form->createView(),
-			"marked" => $marked
+			"marked" => $marked,
+			"nickname" => $this->getUser()->getNickname()
 		));
 	}
 }

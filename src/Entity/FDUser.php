@@ -28,6 +28,15 @@ class FDUser implements UserInterface, \Serializable
 	private $nickname;
 
     /**
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "La descrizione non può superare i 255 caratteri"
+     * )
+     */
+    private $description;
+
+    /**
      * @ORM\Column(unique=true, name="email", type="string")
      */
     private $email;
@@ -51,7 +60,7 @@ class FDUser implements UserInterface, \Serializable
 
 	public function getUsername()
     {
-        return $this->nickname;
+        return $this->email;
     }
 
     public function getRoles()
@@ -153,5 +162,17 @@ class FDUser implements UserInterface, \Serializable
     public function getMarker()
     {
         return $this->marker;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    } 
+
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

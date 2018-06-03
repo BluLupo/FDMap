@@ -12,3 +12,11 @@ require('bootstrap-sass');
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
 });
+
+function logout() {
+	document.location.href = "/logout";
+}
+
+function profile() {
+	document.location.href = "/user/";
+}

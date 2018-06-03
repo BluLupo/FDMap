@@ -11,6 +11,9 @@ use App\Entity\Marker;
 
 class MainController extends Controller
 {
+	/**
+	 * @Route("/", name="map")
+	 */
 	public function mainAction(Request $request)
 	{
 		$marker = new Marker;

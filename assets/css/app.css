@@ -4,6 +4,12 @@
   padding-top:1%;
 }
 
+.title {
+  font-family: "Roboto", serif;
+  padding-top:10%;
+  font-size:36px;
+}
+
 .fd_modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -65,14 +71,18 @@
     color: white;
 }
 
-.fd_modal-body {padding: 2px 16px;}
+.fd_modal-body {
+  padding: 2px 16px;
+}
 
-.fd_sidebarlogo {
+.fd_sidenav_logo {
   position: absolute;
-  left: 50%;
-  bottom: 20px;
-  transform: translate(-50%, -50%);
+  bottom:3%;
+  width: 100%;
   margin: 0 auto;
+  font-family: "Kaushan Script", serif, cursive;
+  font-size:15px;
+  text-align: center;
 }
 
 .fd_sidenav {
@@ -83,7 +93,7 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background: #1a4c8a;
+    background: #ffffff;
     overflow-x: hidden;
     padding-top: 20px;
 }
@@ -98,11 +108,9 @@
 
 .fd_sidenav p:hover {
     color: #ffffff;
+    background: #6baeff;
 }
 
-.fd_main {
-    width: 90%;
-}
 
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
@@ -202,12 +210,24 @@
 .fd_container .fd_info span .fa {
   color: #EF3B3A;
 }
-body {
+.blue-bg {
+  height:100%;
+  margin:0;
+  min-height:100%;
   background-size: 800px 100%;
   background-position: 50% 100%;
   background-repeat: no-repeat;
-  background: #6baeff; /* fallback for old browsers */
+  background: #6baeff !important; /* fallback for old browsers */
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      
+}
+
+#fd_body {
+  text-align: center !important;
+  position:absolute !important;
+  top: 0px !important;
+  width:90% !important;
+  left:10% !important;
+  height:100% !important;
 }

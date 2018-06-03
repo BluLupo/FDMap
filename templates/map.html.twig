@@ -1,9 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'sidenav.html.twig' %}
 
 {% block stylesheets %}
 	{{ parent() }}
 	<style>
-      	#map {
+      	#fd_body {
         	position: absolute;
     		top:0px;
 		   	bottom: 0;
@@ -12,21 +12,18 @@
     </style>
 {% endblock %}
 
-{% block body %}
-	<div class="fd_main" id="map">
-	</div>
-	<div class="fd_sidenav">
-		{% if marked %}
-			<p data-toggle="modal" data-target="#editModal">Cambia posizione</p>
-			<p data-toggle="modal" data-target="#deleteModal">Elimina posizione</p>
-		{% else %}
-			<p data-toggle="modal" data-target="#addModal">Fissa posizione</p>
-		{% endif %}
-		<p onclick="logout()" id="logout">Logout</p>
-		<div class="fd_sidebarlogo">
-			<img src=" {{ asset('images/logo.png') }}" width="60" height="60"/>
-		</div>
-	</div>
+{% block sidenav_options %}
+	{% if marked %}
+		<p data-toggle="modal" data-target="#editModal">Cambia posizione</p>
+		<p data-toggle="modal" data-target="#deleteModal">Elimina posizione</p>
+	{% else %}
+		<p data-toggle="modal" data-target="#addModal">Fissa posizione</p>
+	{% endif %}
+	<p onclick="profile()">Profilo</p>
+	<p onclick="logout()" id="logout">Logout</p>
+{% endblock %}
+
+{% block modals %}
 	<div class="modal fade" id="addModal" role="dialog">
 	    <div class="modal-dialog">
 	    
@@ -46,8 +43,8 @@
 		        </div>
 		    </div>
 	    </div>
-	  </div>
-	  <div class="modal fade" id="editModal" role="dialog">
+	</div>
+	<div class="modal fade" id="editModal" role="dialog">
 	    <div class="modal-dialog">
 	    
 	      <!-- Modal content-->
@@ -65,8 +62,8 @@
 		        </div>
 		    </div>
 	    </div>
-	  </div>
-	  <div class="modal fade" id="deleteModal" role="dialog">
+	</div>
+	<div class="modal fade" id="deleteModal" role="dialog">
 	    <div class="modal-dialog">
 	    
 	      <!-- Modal content-->
@@ -84,16 +81,23 @@
 		        </div>
 		    </div>
 	    </div>
-	  </div>
+	</div>
 {% endblock %}
 
 {% block javascripts %}
 	<script>
 		var previousMarker = null;
 		var map = null;
+		function logout() {
+			document.location.href = "/logout";
+		}
+
+		function profile() {
+			document.location.href = "/user/";
+		}
 		function initMap() {
 
-        	map = new google.maps.Map(document.getElementById('map'), {
+        	map = new google.maps.Map(document.getElementById('fd_body'), {
           				zoom: 6,
           				center: {lat: 41.5325, lng: 12.2858 
           			}
@@ -109,7 +113,15 @@
                 	var nickname = '{{ nickname }}';
                     data.forEach(function(elem) {
                     	var infowindow = new google.maps.InfoWindow({
-				          	content: elem.nickname
+				          	content: 
+				          	'<div id="content">' +
+							'<div id="siteNotice">' +
+							'</div>' +
+							'<h2 id="firstHeading" class="firstHeading"> ' + elem.nickname + '</h2>' +
+							'<div id="bodyContent">' +
+							'<p> ' + elem.description + ' </p>' +
+							'</div>' +
+							'</div>'
 				        });
                     	var marker = new google.maps.Marker({
 				          position: {lat: Number(elem.latitude), lng: Number(elem.longitude)},
@@ -191,10 +203,6 @@
                 }
             });
         }
-
-	    function logout() {
-	    	document.location.href = "/logout";
-	    }
     </script>
     <script async defer
    		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyEDy7B__fUUmJsMDaoLGUrClpCmbQPic&callback=initMap">

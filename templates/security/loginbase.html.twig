@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="{{ asset('build/app.js') }}"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <title>
         	{% block title %}
@@ -14,13 +13,10 @@
     	</title>
         {% block stylesheets %}
             <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
-            <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
             <link href="{{ asset('build/app.css') }}" rel="stylesheet" />
         {% endblock %}
     </head>
-    <body class="blue_bg">
-        {% block modals %}
-        {% endblock %}
+    <body class="blue-bg">
         <div class="container">
             {% for type, flashes in app.session.flashbag.all %}
                 {% for flash in flashes %}

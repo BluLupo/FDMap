@@ -26,10 +26,12 @@ class MarkerController extends Controller
 		$markers = $this->getDoctrine()->getManager()->getRepository('App:Marker')->findAll();
 		$result = array();
 		foreach($markers as $marker) {
+			$user = $marker->getUser();
 			array_push($result, array(
 				'latitude' => $marker->getLatitude(),
 				'longitude' => $marker->getLongitude(),
-				'nickname' => $marker->getUser()->getNickname()
+				'nickname' => $user->getNickname(),
+				'description' => $user->getDescription()
 			));
 		}
 

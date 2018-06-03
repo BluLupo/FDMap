@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'security/loginbase.html.twig' %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -19,7 +19,7 @@
                 <div><img style="vertical-align:middle;" src=" {{ asset('images/logo.png') }}" width="150" height="150"/></div>
             </div>
             <form  class="fd_login-form" action="{{ path('login') }}" method="post">
-                <input name="_username" type="text" placeholder="Nickname"/>
+                <input name="_username" type="text" placeholder="Email"/>
                 <input name="_password" type="password" placeholder="Password"/>
                 <button>login</button>
                 <p class="fd_message">Non hai un account? <a href="{{ path('register') }}">Creane uno!</a></p>

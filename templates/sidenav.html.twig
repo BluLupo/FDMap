@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="fd_main">
+		<div class="fd_sidenav">
+			<div class="fd_sidenav_options">
+				{% block sidenav_options %}
+				{% endblock %}
+			</div>
+			<div class="fd_sidenav_logo">
+				<div><img src=" {{ asset('images/logo.png') }}" width="60" height="60"/></div>
+				<div>Jump into the fandom!</div>
+			</div>
+		</div>
+		<div id="fd_body" class="blue-bg">
+			{% block fd_body %}
+			{% endblock %}
+		</div>
+	</div>
+{% endblock %}

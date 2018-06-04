@@ -60,7 +60,7 @@ class FDUser implements UserInterface, \Serializable
 
 	public function getUsername()
     {
-        return $this->email;
+        return $this->nickname;
     }
 
     public function getRoles()

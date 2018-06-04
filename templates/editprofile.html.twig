@@ -2,7 +2,7 @@
 
 {% block sidenav_options %}
 	<p data-toggle="modal" data-target="#editProfile">Salva profilo</p>
-	<p onclick="profile()" id="map">Torna al profilo</p>
+	<p onclick="map()" id="map">Mappa</p>
 	<p onclick="logout()" id="logout">Logout</p>
 {% endblock %}
 
@@ -25,8 +25,8 @@
 			document.location.href = "/logout";
 		}
 
-		function profile() {
-			document.location.href = "/profile";
+		function map() {
+			document.location.href = "/";
 		}
 	</script>
 {% endblock %}

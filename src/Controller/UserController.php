@@ -16,11 +16,19 @@ use App\Entity\User;
 class UserController extends Controller
 {
 	/**
-	 * @Route("/", name="profile")
+	 * @Route("/profile", name="profile")
 	 */
 	public function userAction(Request $request)
 	{
 		$user = $this->getUser();
+		
+		return $this->render("profile.html.twig", array(
+			"form" => $form->createView()
+		));		
+	}
+
+	public function editAction(Request $request)
+	{
 		$em = $this->getDoctrine()->getManager();
 		$form = $this->createFormBuilder()
 			->add('nickname', Type\TextType::class, array(
@@ -56,8 +64,7 @@ class UserController extends Controller
                 }
             }
 		}
-
-		return $this->render("profile.html.twig", array(
+		return $this->render("editprofile.html.twig", array(
 			"form" => $form->createView()
 		));
 	}

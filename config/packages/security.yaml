@@ -4,7 +4,7 @@ security:
         pgsql:
             entity:
                 class: App\Entity\FDUser
-                property: nickname
+                property: email
 
     firewalls:
         main:

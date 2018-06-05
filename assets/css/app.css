@@ -1,11 +1,47 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
+.profilePic {
+    width:100px;
+    height:100px;
+}
+
+.grid-divider [class*='profile']:not(:last-child):after {
+  background: #f2f2f2;
+  width: 1px;
+  content: "";
+  display:block;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  right: 0;
+  min-height: 70px;
+}
+
+.bold-data {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.profileInfoElems {
+  padding:10px;
+}
+
+.profilePicture {
+  float: left;
+  text-align: center;
+}
+
+.profileInfo {
+    text-align:left;
+    margin-left: 51%;
+}
+
 .container {
   padding-top:1%;
 }
 
 .title {
-  font-family: "Roboto", serif;
+  font-family: "Roboto", sans-serif;
   padding-top:10%;
   font-size:36px;
 }
@@ -117,11 +153,32 @@
     .sidenav a {font-size: 18px;}
 }
 
+.fd_profile-content {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  width: 100%;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
 .fd_login-page {
   width: 360px;
   padding: 8% 0 0;
   margin: auto;
 }
+
+.fd_profile {
+  font-family:"Roboto" sans-serif;
+  font-size: 18px;
+  width: 40%;
+  padding: 8% 0 0;
+  margin: auto;
+  text-align: center;
+}
+
 .fd_form-logo {
   font-size:24px;
   padding: 10px;

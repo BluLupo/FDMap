@@ -23,10 +23,13 @@ class UserController extends Controller
 		$user = $this->getUser();
 		
 		return $this->render("profile.html.twig", array(
-			"form" => $form->createView()
+			"user" => $user
 		));		
 	}
 
+	/**
+	 * @Route("/profile/edit", name="profile_edit")
+	 */
 	public function editAction(Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
@@ -50,6 +53,7 @@ class UserController extends Controller
 		{
 			if($form->isValid()) 
             {
+				$user = $this->getUser();
             	$data = $form->getData();
             	$user->setNickname($data['nickname']);
             	$user->setDescription($data['description']);
@@ -68,4 +72,58 @@ class UserController extends Controller
 			"form" => $form->createView()
 		));
 	}
+
+	/**
+	 * @Route("/password/new", name="password_reset")
+	 */
+	public function newPasswordAction(Request $request)
+	{
+		$em = $this->getDoctrine()->getManager();
+    	$encoder = $this->container->get('security.password_encoder');
+
+    	$user = $this->getUser();		
+    	$form = $this->createFormBuilder()
+    		->add('nickname', Type\HidentType::class, array(
+    			'data' => $user->getNickname();
+    		))
+    		->add('password', Type\PasswordType::class, array(
+                'required' => true,
+                'attr' => array(
+                    'placeholder' => "Password"
+                )
+            ))
+            ->add('password2', Type\PasswordType::class, array(
+                'required' => true,
+                'attr' => array(
+                    'placeholder' => "Ripeti password"
+                )
+            ))
+    		->add('submit', Type\SubmitType::class, array(
+                'label' => "Registra"
+            ))
+    		->getForm();
+
+    	$form->handleRequest($request);
+        if($form->isSubmitted())
+        {
+            if($form->isValid()) 
+            {
+                $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
+                $em->flush();
+    		    return $this->redirectToRoute("profile");
+            } else {
+                $errors = $form->getErrors(true);
+
+                foreach($errors as $error) 
+                {
+                    dump($error);
+                    $this->addFlash('notice' , $error->getMessage());
+                }
+            }
+    	}
+
+    	return $this->render('editprofile.html.twig', array(
+    		'form' => $form->createView()
+    	));
+    }
 }

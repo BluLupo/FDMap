@@ -37,19 +37,19 @@
     </div>
 	<script>
 		function logout() {
-			document.location.href = "/logout";
+			document.location.href = "{{ path('logout') }}";
 		}
 
 		function map() {
-			document.location.href = "/map";
+			document.location.href = "{{ path('map') }}";
 		}
 
 		function updateInfo() {
-			document.location.href = "/user/profile/edit";
+			document.location.href = "{{ path('profile_edit') }}";
 		}
 		
 		function updatePassword() {
-			document.location.href = "/user/password/change";
+			document.location.href = "{{ path('password_reset') }}";
 		}
 	</script>
 {% endblock %}

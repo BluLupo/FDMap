@@ -84,7 +84,7 @@ class UserController extends Controller
     	$user = $this->getUser();		
     	$form = $this->createFormBuilder()
     		->add('nickname', Type\HidentType::class, array(
-    			'data' => $user->getNickname();
+    			'data' => $user->getNickname()
     		))
     		->add('password', Type\PasswordType::class, array(
                 'required' => true,

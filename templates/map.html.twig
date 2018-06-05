@@ -89,11 +89,11 @@
 		var previousMarker = null;
 		var map = null;
 		function logout() {
-			document.location.href = "/logout";
+			document.location.href = "{{ path('logout') }}";
 		}
 
 		function profile() {
-			document.location.href = "/user/profile/";
+			document.location.href = "{{ path('profile') }}";
 		}
 		function initMap() {
 

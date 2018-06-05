@@ -22,7 +22,7 @@ class UserController extends Controller
 	{
 		$user = $this->getUser();
 		
-		return $this->render("profile.html.twig", array(
+		return $this->render("profile/profile.html.twig", array(
 			"user" => $user
 		));		
 	}
@@ -68,7 +68,7 @@ class UserController extends Controller
                 }
             }
 		}
-		return $this->render("editprofile.html.twig", array(
+		return $this->render("profile/editprofile.html.twig", array(
 			"form" => $form->createView()
 		));
 	}
@@ -83,7 +83,7 @@ class UserController extends Controller
 
     	$user = $this->getUser();		
     	$form = $this->createFormBuilder()
-    		->add('nickname', Type\HidentType::class, array(
+    		->add('nickname', Type\HiddenType::class, array(
     			'data' => $user->getNickname()
     		))
     		->add('password', Type\PasswordType::class, array(
@@ -99,7 +99,7 @@ class UserController extends Controller
                 )
             ))
     		->add('submit', Type\SubmitType::class, array(
-                'label' => "Registra"
+                'label' => "Cambia"
             ))
     		->getForm();
 
@@ -108,7 +108,8 @@ class UserController extends Controller
         {
             if($form->isValid()) 
             {
-                $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
+                $data = $form->getData();
+                $user->setPassword($encoder->encodePassword($user, $data['password']));
                 $em->flush();
     		    return $this->redirectToRoute("profile");
             } else {
@@ -122,7 +123,7 @@ class UserController extends Controller
             }
     	}
 
-    	return $this->render('editprofile.html.twig', array(
+    	return $this->render('profile/editpwd.html.twig', array(
     		'form' => $form->createView()
     	));
     }

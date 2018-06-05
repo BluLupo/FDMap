@@ -1,0 +1,36 @@
+{% extends 'sidenav.html.twig' %}
+
+{% block sidenav_options %}
+	<p onclick="profile()" id="profile">Torna al profilo</p>
+	<p onclick="map()" id="map">Torna alla mappa</p>
+	<p onclick="logout()" id="logout">Logout</p>
+{% endblock %}
+
+{% block modals %}
+
+{% endblock %}
+
+{% block fd_body%}
+	<div class="title">Modifica profilo</div>
+	<div class='fd_login-page'>
+        <div class='fd_form'>
+			{{ form_start(form) }}
+			{{ form_widget(form.password) }}
+			{{ form_widget(form.password2) }}
+			{{ form_end(form) }}
+		</div>
+	</div>
+	<script>
+		function logout() {
+			document.location.href = "{{ path('logout') }}";
+		}
+
+		function map() {
+			document.location.href = "{{ path('map') }}";
+		}
+
+		function profile() {
+			document.location.href = "{{ path('profile') }}";
+		}
+	</script>
+{% endblock %}

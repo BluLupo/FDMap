@@ -43,6 +43,10 @@ class FDUser implements UserInterface, \Serializable
 
 	/**
 	 * @ORM\Column(name="password", type="string", length=64)
+     * @Assert\Length(
+     *      min = 8,
+     *      minMessage = "La password deve essere lunga almeno 8 caratteri"
+     * )
 	 */
 	private $password;
 

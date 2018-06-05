@@ -8,7 +8,8 @@
 				{% endblock %}
 			</div>
 			<div class="fd_sidenav_logo">
-				<div><img src=" {{ asset('images/logo.png') }}" width="60" height="60"/></div>
+				<div>Powered by:</div>
+				<div><img onclick="furryden()" src=" {{ asset('images/logo.png') }}" width="60" height="60"/></div>
 				<div>Jump into the fandom!</div>
 			</div>
 		</div>
@@ -17,4 +18,13 @@
 			{% endblock %}
 		</div>
 	</div>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script>
+		function furryden() {
+			document.location.href="https://www.furryden.it";
+		}
+	</script>
 {% endblock %}

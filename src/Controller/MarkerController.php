@@ -31,7 +31,7 @@ class MarkerController extends Controller
 				'latitude' => $marker->getLatitude(),
 				'longitude' => $marker->getLongitude(),
 				'nickname' => $user->getNickname(),
-				'propic' => "images/propics/".($user->hasPropic()?$user->getPropic():"default.png"),
+				'propic' => "/images/propics/".($user->hasPropic()?$user->getPropic():"default.png"),
 				'description' => $user->getDescription()
 			));
 		}

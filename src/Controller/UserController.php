@@ -8,7 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Propic;
 use App\Entity\User;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 /**
  * @Route("/user")
@@ -21,9 +24,10 @@ class UserController extends Controller
 	public function userAction(Request $request)
 	{
 		$user = $this->getUser();
-		
+		$path = "/images/propics/" . (($user->hasPropic())?$user->getPropic():"default.png");
 		return $this->render("profile/profile.html.twig", array(
-			"user" => $user
+			"user" => $user,
+            "propic" => $path
 		));		
 	}
 
@@ -126,5 +130,74 @@ class UserController extends Controller
     	return $this->render('profile/editpwd.html.twig', array(
     		'form' => $form->createView()
     	));
+    }
+
+    /**
+     * @Route("/profile/upload-profile-image", name="upload-profile-image")
+     */
+    public function uploadPropicAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $encoder = $this->container->get('security.password_encoder');
+        $propic = new Propic();
+
+        $user = $this->getUser();       
+        $form = $this->createFormBuilder($propic)
+            ->add('propic', Type\FileType::class, array(
+                'data_class' => Propic::class,
+            ))
+            ->add('submit', Type\SubmitType::class, array(
+                'label' => "Cambia"
+            ))
+            ->getForm();
+
+        $form->handleRequest($request);
+        if($form->isSubmitted())
+        {
+            if($form->isValid()) 
+            {
+                $file = $propic->getPropic();
+                $fileSystem = new Filesystem();
+                $dirPath = $this->getParameter('propic_directory');
+                $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+
+                // moves the file to the directory where brochures are stored
+                $file->move(
+                    $dirPath,
+                    $fileName
+                );
+
+                if($user->hasPropic()) {
+                    $fileSystem->remove($dirPath . $user->getPropic());
+                }
+                
+
+                // updates the 'brochure' property to store the PDF file name
+                // instead of its contents
+                $user->setPropic($fileName);
+
+                // ... persist the $product variable or any other work
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('profile'));
+            } else {
+                $errors = $form->getErrors(true);
+
+                foreach($errors as $error) 
+                {
+                    dump($error);
+                    $this->addFlash('notice' , $error->getMessage());
+                }
+            }
+        }
+
+        return $this->render('profile/editpropic.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
+
+    private function generateUniqueFileName()
+    {
+        return md5(uniqid());
     }
 }

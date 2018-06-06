@@ -41,6 +41,11 @@ class FDUser implements UserInterface, \Serializable
      */
     private $email;
 
+    /**
+     * @ORM\Column(name="propic", type="string", nullable=true)
+     */
+    private $propic;
+
 	/**
 	 * @ORM\Column(name="password", type="string", length=64)
      * @Assert\Length(
@@ -178,5 +183,22 @@ class FDUser implements UserInterface, \Serializable
     public function getDescription()
     {
         return $this->description;
+    }
+
+    public function setPropic($propic)
+    {
+        $this->propic = $propic;
+
+        return $this;
+    } 
+
+    public function getPropic()
+    {
+        return $this->propic;
+    }
+
+    public function hasPropic() 
+    {
+        return $this->propic !== null;
     }
 }

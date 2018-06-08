@@ -86,6 +86,7 @@
 
 {% block javascripts %}
 	<script>
+		$(".loader").fadeIn()
 		var previousMarker = null;
 		var map = null;
 		function logout() {
@@ -139,6 +140,7 @@
 				          infowindow.open(map, marker);
 				        });
                     });
+                    $(".loader").fadeOut();
                 }
             });
 

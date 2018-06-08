@@ -18,12 +18,21 @@
             <div class='fd_form-logo'> 
                 <div><img style="vertical-align:middle;" src=" {{ asset('images/logo.png') }}" width="150" height="150"/></div>
             </div>
-            <form  class="fd_login-form" action="{{ path('login') }}" method="post">
+            <form onsubmit="onLogin()" class="fd_login-form" action="{{ path('login') }}" method="post">
                 <input name="_username" type="text" placeholder="Email"/>
                 <input name="_password" type="password" placeholder="Password"/>
-                <button>login</button>
+                <button>Login</button>
                 <p class="fd_message">Non hai un account? <a href="{{ path('register') }}">Creane uno!</a></p>
             </form>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(".loader").fadeOut();
+        function onLogin() {
+            $(".loader").fadeIn();
+        }
+    </script>
 {% endblock %}

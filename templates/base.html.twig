@@ -19,6 +19,10 @@
         {% endblock %}
     </head>
     <body class="blue_bg">
+        <div class="loader">
+            <img id="loadingLogo" src=" {{ asset('images/logo.png') }}" width="120" height="120"/>
+            Caricamento...
+        </div>
         {% block modals %}
         {% endblock %}
         <div class="container">

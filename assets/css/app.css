@@ -74,7 +74,6 @@
 }
 
 .title {
-  font-family: "Roboto", sans-serif;
   padding-top:8%;
   font-size:36px;
 }
@@ -149,13 +148,12 @@
   bottom:3%;
   width: 100%;
   margin: 0 auto;
-  font-family: "Kaushan Script", serif, cursive;
+  font-family: "Kaushan Script", serif, cursive!important;
   font-size:15px;
   text-align: center;
 }
 
 .fd_sidenav {
-    font-family: "Roboto", sans-serif;
     height: 100%;
     width: 10%;
     position: fixed;
@@ -204,7 +202,6 @@
 }
 
 .fd_profile {
-  font-family:"Roboto" sans-serif;
   font-size: 18px;
   width: 40%;
   padding: 4% 0 0;
@@ -228,7 +225,6 @@
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 .fd_form input {
-  font-family: "Roboto", sans-serif;
   outline: 0;
   background: #f2f2f2;
   width: 100%;
@@ -239,7 +235,6 @@
   font-size: 14px;
 }
 .fd_form button {
-  font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
   background: #1a4c8a;
@@ -308,7 +303,6 @@
   background-position: 50% 100%;
   background-repeat: no-repeat;
   background: #6baeff !important; /* fallback for old browsers */
-  font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      
 }
@@ -320,4 +314,8 @@
   width:90% !important;
   left:10% !important;
   height:100% !important;
+}
+
+html {
+  font-family: "Roboto", sans-serif;
 }

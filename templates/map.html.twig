@@ -88,6 +88,7 @@
 	<script>
 		$(".loader").fadeIn()
 		var previousMarker = null;
+		var previousInfoMarker = null;
 		var map = null;
 		function logout() {
 			document.location.href = "{{ path('logout') }}";
@@ -137,7 +138,11 @@
 
 				        }
 				        marker.addListener('click', function() {
-				          infowindow.open(map, marker);
+				        	if(previousInfoMarker == null) {
+				        		infowindow.close(map, previousInfoMarker);
+				        	}
+				        	previousInfoMarker = marker;
+				          	infowindow.open(map, marker);
 				        });
                     });
                     $(".loader").fadeOut();

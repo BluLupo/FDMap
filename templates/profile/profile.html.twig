@@ -31,7 +31,6 @@
         			<p class="bold-data">{{ user.getDescription }}</p>
         		</div>
         		<button type="button" onclick="updateInfo()" class="btn btn-info">Aggiorna dati</button>
-        		<button type="button" onclick="updatePassword()" class="btn btn-info">Cambia password</button>
         	</div>
         </div>
     </div>
@@ -46,10 +45,6 @@
 
 		function updateInfo() {
 			document.location.href = "{{ path('profile_edit') }}";
-		}
-		
-		function updatePassword() {
-			document.location.href = "{{ path('password_reset') }}";
 		}
 
         function uploadPropic() {

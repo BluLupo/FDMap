@@ -103,6 +103,7 @@
 {% endblock %}
 
 {% block javascripts %}
+	{{ parent() }}
 	<script>
 		$(".loader").fadeIn()
 		var previousMarker = null;

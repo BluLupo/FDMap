@@ -18,7 +18,9 @@
             <link href="{{ asset('build/app.css') }}" rel="stylesheet" />
         {% endblock %}
     </head>
-    <body class="blue_bg">
+    <body class="blue_bg">        
+        {% block javascripts %}
+        {% endblock %}
         <div class="loader">
             <img id="loadingLogo" src=" {{ asset('images/logo.png') }}" width="120" height="120"/>
             Caricamento...
@@ -36,8 +38,6 @@
             {% endfor %}
         </div>
         {% block body %}
-        {% endblock %}
-        {% block javascripts %}
         {% endblock %}
     </body>
 </html>

@@ -2,15 +2,22 @@
 
 {% block body %}
 	<div class="fd_main">
-		<div class="fd_sidenav">
-			<div class="fd_sidenav_options">
-				{% block sidenav_options %}
-				{% endblock %}
-			</div>
-			<div class="fd_sidenav_logo">
-				<div>Powered by:</div>
-				<div><img onclick="furryden()" src=" {{ asset('images/logo.png') }}" width="60" height="60"/></div>
-				<div>Jump into the fandom!</div>
+		<div class="fd_sidenav" id="sidenav_menu">
+			<div id="menuButton" onclick="toggleMenu(this)">
+	            <div class="bar1"></div>
+	            <div class="bar2"></div>
+	            <div class="bar3"></div>
+	        </div>
+	        <div class="fd_sidenav-elements">
+				<div class="fd_sidenav_options">
+					{% block sidenav_options %}
+					{% endblock %}
+				</div>
+				<div class="fd_sidenav_logo">
+					<div>Powered by:</div>
+					<div><img onclick="furryden()" src=" {{ asset('images/logo.png') }}" width="60" height="60"/></div>
+					<div>Jump into the fandom!</div>
+				</div>
 			</div>
 		</div>
 		<div id="fd_body" class="blue-bg">
@@ -23,6 +30,17 @@
 {% block javascripts %}
 	{{ parent() }}
 	<script>
+        var isOpen=false;
+        function toggleMenu(x) {
+            if(isOpen) {
+                isOpen = false;
+                document.getElementById("sidenav_menu").style.width="50px";
+            } else {
+                isOpen = true;
+                document.getElementById("sidenav_menu").style.width="280px";
+            }
+            x.classList.toggle("change");
+        }
 		function furryden() {
 			document.location.href="https://www.furryden.it";
 		}

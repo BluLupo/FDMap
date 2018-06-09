@@ -1,5 +1,179 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
+/* Stili con media query */
+
+@media screen and (max-width: 700px) {
+    .fd_sidenav {
+        height: 100%;
+        width: 50px;
+        position: fixed;
+        z-index: 2;
+        top: 0px;
+        left: 0;
+        background: #ffffff;
+        overflow-x: hidden;
+        padding-top: 20px;
+        transition:width 0.5s;
+        -moz-transition:width 0.5s; /* Firefox 4 */
+        -webkit-transition:width 0.5s; /* Safari and Chrome */
+        -o-transition:width 0.5s; /* Opera */
+    }
+
+    .fd_sidenav-elements {
+        padding-left: 50px;
+    }
+
+    #fd_body {
+        text-align: center !important;
+        position:absolute !important;
+        top: 0px !important;
+        left: 50px !important;
+        right:0px !important;
+        height:100% !important;
+        width:auto!important;
+    }
+
+    #menuButton {
+        display: inline-block;
+        cursor: pointer;
+        width:40px;
+        padding:5px;
+        z-index:3;
+    }
+
+    .fd_sidenav_logo {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 701px) {
+
+    .fd_sidenav {
+        height: 100%;
+        width: 230px;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background: #ffffff;
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+
+    #fd_body {
+        text-align: center !important;
+        position:absolute !important;
+        top: 0px !important;
+        left: 230px !important;
+        right:0px !important;
+        height:100% !important;
+        width:auto!important;
+    } 
+
+    #menuButton {
+        display: none;
+    }   
+    
+    .fd_sidenav_logo {
+        position: absolute;
+        bottom:3%;
+        width: 100%;
+        margin: 0 auto;
+        font-family: "Kaushan Script", serif, cursive!important;
+        font-size:15px;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .fd_profile {
+        font-size: 18px;
+        width: 60%;
+        padding: 4% 0 0;
+        margin: auto;
+        text-align: center;
+    } 
+
+    .profileInfoElems {
+      padding:10px;
+    }
+
+    .profilePicture {
+        width: 100%;
+        text-align: center;
+    }
+
+    .profileInfo {
+        text-align:center;
+    }
+
+    .fd_profile-content {
+        position: relative;
+        z-index: 1;
+        background: #FFFFFF;
+        width: 100%;
+        margin: 0 auto 100px;
+        padding: 45px;
+        text-align: center;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
+}
+
+@media screen and (min-width: 1001px) {
+    .fd_profile {
+      font-size: 18px;
+      width: 60%;
+      padding: 4% 0 0;
+      margin: auto;
+      text-align: center;
+    } 
+
+    .profileInfoElems {
+      padding:10px;
+    }
+
+    .profilePicture {
+      float: left;
+      text-align: center;
+    }
+
+    .profileInfo {
+        text-align:left;
+        margin-left: 51%;
+    }
+
+    .fd_profile-content {
+      position: relative;
+      z-index: 1;
+      background: #FFFFFF;
+      width: 100%;
+      margin: 0 auto 100px;
+      padding: 45px;
+      text-align: center;
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
+}
+
+.bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #333;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+    transform: rotate(45deg) translate(-8px, -8px);
+}
+
 #loadingLogo {
   margin-left: auto;
   margin-right: auto;
@@ -53,20 +227,6 @@
 .bold-data {
   font-weight: bold;
   font-size: 20px;
-}
-
-.profileInfoElems {
-  padding:10px;
-}
-
-.profilePicture {
-  float: left;
-  text-align: center;
-}
-
-.profileInfo {
-    text-align:left;
-    margin-left: 51%;
 }
 
 .container {
@@ -143,28 +303,6 @@
   padding: 2px 16px;
 }
 
-.fd_sidenav_logo {
-  position: absolute;
-  bottom:3%;
-  width: 100%;
-  margin: 0 auto;
-  font-family: "Kaushan Script", serif, cursive!important;
-  font-size:15px;
-  text-align: center;
-}
-
-.fd_sidenav {
-    height: 100%;
-    width: 10%;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background: #ffffff;
-    overflow-x: hidden;
-    padding-top: 20px;
-}
-
 .fd_sidenav p {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
@@ -184,30 +322,12 @@
     .sidenav a {font-size: 18px;}
 }
 
-.fd_profile-content {
-  position: relative;
-  z-index: 1;
-  background: #FFFFFF;
-  width: 100%;
-  margin: 0 auto 100px;
-  padding: 45px;
-  text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-}
-
 .fd_login-page {
   width: 360px;
   padding: 8% 0 0;
   margin: auto;
 }
 
-.fd_profile {
-  font-size: 18px;
-  width: 40%;
-  padding: 4% 0 0;
-  margin: auto;
-  text-align: center;
-}
 
 .fd_form-logo {
   font-size:36px;
@@ -307,14 +427,6 @@
   -moz-osx-font-smoothing: grayscale;      
 }
 
-#fd_body {
-  text-align: center !important;
-  position:absolute !important;
-  top: 0px !important;
-  width:90% !important;
-  left:10% !important;
-  height:100% !important;
-}
 
 html {
   font-family: "Roboto", sans-serif;

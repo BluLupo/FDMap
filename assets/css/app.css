@@ -3,6 +3,12 @@
 /* Stili con media query */
 
 @media screen and (max-width: 700px) {
+    .fd_login-page {
+      width: 80%;
+      padding: 8% 0 0;
+      margin: auto;
+    }
+
     .fd_sidenav {
         height: 100%;
         width: 50px;
@@ -47,6 +53,11 @@
 }
 
 @media screen and (min-width: 701px) {
+    .fd_login-page {
+      width: 360px;
+      padding: 8% 0 0;
+      margin: auto;
+    }
 
     .fd_sidenav {
         height: 100%;
@@ -121,7 +132,7 @@
 
     .bold-data {
       font-weight: bold;
-      font-size: 10px;
+      font-size: 14px;
     }
     
     #propicbutton {
@@ -331,13 +342,6 @@
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
-
-.fd_login-page {
-  width: 360px;
-  padding: 8% 0 0;
-  margin: auto;
-}
-
 
 .fd_form-logo {
   font-size:36px;

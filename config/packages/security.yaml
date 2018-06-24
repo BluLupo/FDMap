@@ -1,7 +1,7 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        pgsql:
+        pdo_mysql:
             entity:
                 class: App\Entity\FDUser
                 property: email
@@ -10,7 +10,7 @@ security:
         main:
             pattern:    ^/
             http_basic: ~
-            provider: pgsql
+            provider: pdo_mysql
             anonymous: ~
             form_login:
                 login_path: login
@@ -40,5 +40,4 @@ security:
 
     encoders:
         App\Entity\FDUser:
-            algorithm: bcrypt
-            cost: 15
+            id: App\Security\PhpassEncoder

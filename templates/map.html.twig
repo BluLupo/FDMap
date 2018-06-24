@@ -105,17 +105,21 @@
 {% block javascripts %}
 	{{ parent() }}
 	<script>
-		$(".loader").fadeIn()
+		$(".loader").fadeIn();
 		var previousMarker = null;
 		var infoWindow 
 		var map = null;
+
 		function logout() {
+			$(".loader").fadeIn();
 			document.location.href = "{{ path('logout') }}";
 		}
 
 		function profile() {
+			$(".loader").fadeIn();
 			document.location.href = "{{ path('profile') }}";
 		}
+
 		function initMap() {
 
         	map = new google.maps.Map(document.getElementById('fd_body'), {

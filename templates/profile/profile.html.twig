@@ -35,20 +35,26 @@
         </div>
     </div>
 	<script>
+        $(".loader").fadeIn();
 		function logout() {
+            $(".loader").fadeIn();
 			document.location.href = "{{ path('logout') }}";
 		}
 
 		function map() {
+            $(".loader").fadeIn();
 			document.location.href = "{{ path('map') }}";
 		}
 
 		function updateInfo() {
+            $(".loader").fadeIn();
 			document.location.href = "{{ path('profile_edit') }}";
 		}
 
         function uploadPropic() {
+            $(".loader").fadeIn();
             document.location.href = "{{ path('upload-profile-image') }}"
         }
+        $(".loader").fadeOut()
 	</script>
 {% endblock %}

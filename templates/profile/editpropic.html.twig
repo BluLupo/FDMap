@@ -21,15 +21,19 @@
 	</div>
 	<script>
 		function logout() {
+			$(".loader").fadeIn();
 			document.location.href = "{{ path('logout') }}";
 		}
 
 		function map() {
+			$(".loader").fadeIn();
 			document.location.href = "{{ path('map') }}";
 		}
 
 		function profile() {
+			$(".loader").fadeIn();
 			document.location.href = "{{ path('profile') }}";
 		}
+		$(".loader").fadeOut();
 	</script>
 {% endblock %}

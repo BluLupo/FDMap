@@ -4,7 +4,7 @@ security:
         pdo_mysql:
             entity:
                 class: App\Entity\FDUser
-                property: email
+                property: login
 
     firewalls:
         main:

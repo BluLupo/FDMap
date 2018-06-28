@@ -9,8 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @UniqueEntity(fields= "nickname", message="Nickname già registrato")
- * @UniqueEntity(fields= "email", message="Email già registrata")
+ * @UniqueEntity(fields= "login", message="Nickname già registrato")
  * )
  */
 class FDUser implements UserInterface, \Serializable
@@ -21,6 +20,16 @@ class FDUser implements UserInterface, \Serializable
 	 * @ORM\GeneratedValue(strategy="AUTO")
 	 */
 	private $id;
+
+    /**
+     * @ORM\Column(name="login", type="string", unique=true)
+     */
+    private $login;
+
+    /**
+     * @ORM\Column(name="email", type="string")
+     */
+    private $email;
 
 	/**
 	 * @ORM\Column(unique=true, name="nickname", type="string")
@@ -35,11 +44,6 @@ class FDUser implements UserInterface, \Serializable
      * )
      */
     private $description;
-
-    /**
-     * @ORM\Column(unique=true, name="email", type="string")
-     */
-    private $email;
 
     /**
      * @ORM\Column(name="propic", type="string", nullable=true)
@@ -125,6 +129,18 @@ class FDUser implements UserInterface, \Serializable
     public function setEmail($email)
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getLogin()
+    {
+        return $this->login;
+    }
+
+    public function setLogin($login)
+    {
+        $this->login = $login;
 
         return $this;
     }

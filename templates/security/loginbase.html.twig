@@ -18,8 +18,8 @@
     </head>
     <body class="blue-bg">
         <div class="loader">
-            <img id="loadingLogo" src=" {{ asset('images/logo.png') }}" width="120" height="120"/>
-            Caricamento...
+            <img class="ld-bounce" src=" {{ asset('images/logo.png') }}" width="120" height="120"/>
+            <div>Caricamento</div>
         </div>
         <div class="container">
             {% for type, flashes in app.session.flashbag.all %}

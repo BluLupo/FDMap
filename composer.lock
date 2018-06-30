@@ -775,7 +775,7 @@
         },
         {
             "name": "doctrine/migrations",
-            "version": "v1.8.1",
+           "version": "v1.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
@@ -1222,7 +1222,7 @@
         },
         {
             "name": "jms/serializer",
-            "version": "1.12.1",
+            "version": "1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
@@ -1306,7 +1306,7 @@
         },
         {
             "name": "jms/serializer-bundle",
-            "version": "2.4.2",
+            "version": "2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/JMSSerializerBundle.git",

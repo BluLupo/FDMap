@@ -1,4 +1,7 @@
 security:
+    role_hierarchy:
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_ADMIN:       ROLE_USER
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         pdo_mysql:
@@ -35,6 +38,7 @@ security:
         - { path: /_wdt/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }  ### These 2 lines needed
         - { path: /_profiler/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
 
     encoders:

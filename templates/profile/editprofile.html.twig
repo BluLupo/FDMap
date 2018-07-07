@@ -11,6 +11,14 @@
 {% endblock %}
 
 {% block fd_body%}
+	{% if error is not null %}
+        <div class="container">
+            <div class="alert alert-danger fade in alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{ error.getMessage() }}
+            </div>
+        </div>
+	{% endif %}
 	<div class="title">Modifica profilo</div>
 	<div class='fd_login-page'>
         <div class='fd_form'>

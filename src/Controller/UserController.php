@@ -4,14 +4,15 @@ namespace App\Controller;
 
 use Symfony\Component\Form\Extension\Core\Type;
 
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Filesystem\Filesystem;
+use App\Form\ProfileType;
 use App\Entity\Propic;
 use App\Entity\User;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 /**
  * @Route("/user")
@@ -37,43 +38,26 @@ class UserController extends Controller
 	public function editAction(Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
-		$form = $this->createFormBuilder()
-			->add('nickname', Type\TextType::class, array(
-				'required' => true, 
-				'attr' => array(
-                    'placeholder' => "Nickname"                
-                )
-			))
-			->add('description', Type\TextType::class, array(
-				'attr' => array(
-					'placeholder' => "Descrizione (max. 255 caratteri)"
-				)
-			))
-			->add('submit', Type\SubmitType::class)
-			->getForm();
+        $form = $this->createForm(ProfileType::class, $this->getUser(), array(
+            "validation_groups" => array("profile")
+        ));
 
+        $err = null;
 		$form->handleRequest($request);
-		if($form->isSubmitted())
-		{
-			if($form->isValid()) 
-            {
-				$user = $this->getUser();
-            	$data = $form->getData();
-            	$user->setNickname($data['nickname']);
-            	$user->setDescription($data['description']);
+		if($form->isSubmitted()) {
+			if($form->isValid()) {
                 $em->flush();
     		    return $this->redirectToRoute("map");
             } else {
                 $errors = $form->getErrors(true);
-
-                foreach($errors as $error) 
-                {
-                    $this->addFlash('notice' , $error->getMessage());
+                foreach($errors as $error) {
+                    $err = $error;
                 }
             }
 		}
 		return $this->render("profile/editprofile.html.twig", array(
-			"form" => $form->createView()
+			"form" => $form->createView(),
+            "error" => $err
 		));
 	}
 

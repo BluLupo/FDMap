@@ -7,6 +7,12 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="{{ asset('build/app.js') }}"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+        <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css"/>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
         <title>
         	{% block title %}
     			FurryDen Map
@@ -18,7 +24,15 @@
             <link href="{{ asset('build/app.css') }}" rel="stylesheet" />
         {% endblock %}
     </head>
-    <body class="blue_bg">        
+    <body class="blue_bg"> 
+        {% for type, flashes in app.session.flashbag.all %}
+            {% for flash in flashes %}
+                <div class="alert alert-danger fade in alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ flash }}
+                </div>
+            {% endfor %}
+        {% endfor %}       
         {% block javascripts %}
         {% endblock %}
         <div class="loader">

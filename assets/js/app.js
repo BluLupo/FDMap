@@ -20,3 +20,7 @@ function logout() {
 function profile() {
 	document.location.href = "/user/";
 }
+
+function userList() {
+	document.location.href = "/admin/user/list"
+}

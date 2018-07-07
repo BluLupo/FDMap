@@ -20,6 +20,9 @@
 		<p data-toggle="modal" data-target="#addModal">Fissa posizione</p>
 	{% endif %}
 	<p onclick="profile()">Profilo</p>
+	{% if is_granted("ROLE_ADMIN") %}
+		<p onclick="userList()">Pannello admin</p>
+	{% endif %}
 	<p onclick="logout()" id="logout">Logout</p>
 {% endblock %}
 
@@ -113,6 +116,11 @@
 		function logout() {
 			$(".loader").fadeIn();
 			document.location.href = "{{ path('logout') }}";
+		}
+
+		function userList() {
+			$(".loader").fadeIn();
+			document.location.href = "{{ path('users_list') }}";
 		}
 
 		function profile() {

@@ -1,0 +1,41 @@
+{% extends 'security/loginbase.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('build/app.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+    	<div class='fd_login-page'>
+            <div class='fd_form'>
+                <div class='fd_form-logo'> 
+                    <div><img style="vertical-align:middle;" src=" {{ asset('images/logo.png') }}" width="150" height="150"/></div>
+                </div>
+                <div class="fd_login-form">
+    			    <p>
+                        Siamo spiacenti di informarti che sei stato bannato da questa piattaforma
+                    </p>
+                    <p>
+                        Il ban è 
+                        <b>
+                        {% if user.permanentBan %} 
+                            <div class="permaban">PERMANENTE</div>
+                            </b>
+                        {% else %} 
+                            <div class="tempban">TEMPORANEO</div>
+                            </b>
+                            e durerà fino al giorno {{ user.to|date("d/m/Y") }}
+                        {% endif %}
+                    </p>
+                    <p>
+                        La ragione di questo ban è: <br>
+                        {{ user.banReason }}
+                    </p>
+                    <p>
+                        Se credi che questo sia un'errore, <br><a href="mailto:furrydenstaff@gmail.com">inviaci una mail</a>
+                    </p>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+{% endblock %}

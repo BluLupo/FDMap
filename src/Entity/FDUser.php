@@ -40,7 +40,8 @@ class FDUser implements UserInterface, \Serializable
      * @ORM\Column(name="description", type="string", length=255, nullable=true)
      * @Assert\Length(
      *      max = 255,
-     *      maxMessage = "La descrizione non può superare i 255 caratteri"
+     *      maxMessage = "La descrizione non può superare i 255 caratteri",
+     *      groups = {"profile"}
      * )
      */
     private $description;
@@ -52,10 +53,6 @@ class FDUser implements UserInterface, \Serializable
 
 	/**
 	 * @ORM\Column(name="password", type="string", length=64)
-     * @Assert\Length(
-     *      min = 8,
-     *      minMessage = "La password deve essere lunga almeno 8 caratteri"
-     * )
 	 */
 	private $password;
 
@@ -66,6 +63,36 @@ class FDUser implements UserInterface, \Serializable
 	 */
 	private $marker;
 
+    /**
+     * @ORM\Column(name="role", type="string")
+     */
+    private $role = "user";
+
+    /**
+     * @ORM\Column(name="banned", type="boolean", options={"default":false})
+     */
+    private $banned = false;
+
+    /**
+     * @ORM\Column(name="end_date", type="date", nullable=true)
+     * @Assert\GreaterThan(
+     *     value="today", 
+     *     groups={"ban"},
+     *     message="La data di fine ban non può essere nel passato"
+     * )
+     */
+    private $endDate;
+
+    /**
+     * @ORM\Column(name="permanent_ban", type="boolean", options={"default":false})
+     */
+    private $permanentBan = false;
+
+    /**
+     * @ORM\Column(name="ban_reason", type="string", nullable=false)
+     */
+    private $banReason;
+
 	public function getSalt()
 	{
 		return null;
@@ -74,11 +101,6 @@ class FDUser implements UserInterface, \Serializable
 	public function getUsername()
     {
         return $this->nickname;
-    }
-
-    public function getRoles()
-    {
-        return array('ROLE_USER');
     }
 
     public function eraseCredentials()
@@ -107,6 +129,11 @@ class FDUser implements UserInterface, \Serializable
             // see section on salt below
             // $this->salt
         ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getNickname()
@@ -170,7 +197,7 @@ class FDUser implements UserInterface, \Serializable
     }
 
     /**
-     * @Assert\IsTrue(message="Le password non corrispondono")
+     * @Assert\IsTrue(message="Le password non corrispondono", groups={"login"})
      */
     public function isPasswordEqual()
     {
@@ -217,4 +244,66 @@ class FDUser implements UserInterface, \Serializable
     {
         return $this->propic !== null;
     }
+
+    public function setRole($role)
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    public function getRoles()
+    {
+        return array("ROLE_" . strtoupper($this->role));
+    }
+    
+    public function getBanned()
+    {
+        return $this->banned;
+    }
+
+    public function setBanned($banned)
+    {
+        $this->banned = $banned;
+        return $this;
+    }
+
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+        return $this;
+    }
+
+    public function getPermanentBan()
+    {
+        return $this->permanentBan;
+    }
+
+    public function setPermanentBan($permanentBan)
+    {
+        $this->permanentBan = $permanentBan;
+        return $this;
+    }
+
+    public function getBanReason()
+    {
+        return $this->banReason;
+    }
+
+    public function setBanReason($banReason)
+    {
+        $this->banReason = $banReason;
+        return $this;
+    }
+
 }

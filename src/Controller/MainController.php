@@ -16,6 +16,10 @@ class MainController extends Controller
 	 */
 	public function mainAction(Request $request)
 	{
+		if($this->getUser()->getBanned())
+		{
+			return $this->redirectToRoute("banned");
+		}
 		$marker = new Marker;
 		$form = $this->createForm(MarkerType::class, $marker);
 		$marker = $this->getUser()->getMarker();
@@ -24,6 +28,16 @@ class MainController extends Controller
 			"form" => $form->createView(),
 			"marked" => $marked,
 			"nickname" => $this->getUser()->getNickname()
+		));
+	}
+
+	/**
+	 * @Route("/banned", name="banned")
+	 */
+	public function bannedAction(Request $request)
+	{
+		return $this->render("security/banned.html.twig", array(
+			"user" => $this->getUser()
 		));
 	}
 }

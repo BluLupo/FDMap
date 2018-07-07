@@ -1,0 +1,54 @@
+{% extends 'sidenav.html.twig' %}
+
+{% block sidenav_options %}
+	<p onclick="userList()">Torna alla lista</p>
+	<p onclick="profile()">Profilo</p>
+	<p onclick="logout()" id="logout">Logout</p>
+{% endblock %}
+
+{% block fd_body %}
+	<script>
+		function userList() {
+            $(".loader").fadeIn();
+            document.location.href = "{{ path('users_list') }}";
+        }
+        function logout() {
+            $(".loader").fadeIn();
+            document.location.href = "{{ path('logout') }}";
+        }
+
+        function map() {
+            $(".loader").fadeIn();
+            document.location.href = "{{ path('map') }}";
+        }
+	</script>
+	{% if error is not null %}
+        <div class="container">
+            <div class="alert alert-danger fade in alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{ error.getMessage() }}
+            </div>
+        </div>
+	{% endif %}
+	<div class="title">
+		Punisci utente
+	</div>
+	<div class="fd_list">
+		{{ form_start(form) }}
+			<div class="form-group">
+				{{ form_label(form.endDate) }}<br>
+				{{ form_widget(form.endDate) }}
+				
+			</div>
+			<div class="form-group">
+				{{ form_label(form.permanentBan) }}<br>
+				{{ form_widget(form.permanentBan) }}
+			</div>
+			<div class="form-group">
+				{{ form_label(form.banReason) }}<br>
+				{{ form_widget(form.banReason) }}
+			</div>
+		{{ form_end(form) }}
+	</div>
+{% endblock %}
+

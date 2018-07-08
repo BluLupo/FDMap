@@ -4,12 +4,14 @@ namespace App\EventListener;
  
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\RouterInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Services\CredentialsService; 
 
 class AuthenticationListener
 {
 	protected $credentialsService;
-
 
 	public function __construct(CredentialsService $credentialsService)
 	{
@@ -34,7 +36,7 @@ class AuthenticationListener
 	 * @author 	Joe Sexton <joe@webtipblog.com>
 	 * @param 	InteractiveLoginEvent $event
 	 */
-	public function onAuthenticationSuccess( InteractiveLoginEvent $event )
+	public function onAuthenticationSuccess( InteractiveLoginEvent $event)
     {
     	$login = $event->getRequest()->request->all()['_username'];
         $this->credentialsService->updateCredentials($login);

@@ -34,6 +34,11 @@ services:
         class: App\EventListener\AuthenticationListener
         tags:
             - { name: kernel.event_listener, event: security.authentication.failure, method: onAuthenticationFailure }
+
+    app.banned_listener:
+        class: App\EventListener\BanListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
  
     # authentication success event listener
     app.security.interactive_login_listener:

@@ -11,6 +11,13 @@ doctrine:
                 dbname: fdmap
                 user: fd
                 password: lolasd
+            furryden:
+                driver: pdo_mysql
+                host: localhost
+                port: 3306
+                dbname: furrydensito
+                user: fd
+                password: lolasd
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore

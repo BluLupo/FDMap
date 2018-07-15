@@ -1,0 +1,17 @@
+{% extends 'security/loginbase.html.twig' %}
+
+{% block body %}
+	<div class="errorPage">
+	    <div class="fl">
+	    	<div>
+	    		<img src=" {{ asset('images/zampa-500.png') }} " width=200 height=200></a>
+	    	</div>
+	    	<div>
+	    		<h1> 500 </h1>
+	    		<p>Whoops! Un errore mi ha impedito di proseguire!</p>
+	    		<p>Se il problema persiste, contatta un amministratore!</p>
+	    		<p><a href="{{ path('map') }}">Torna alla home!</a></p>
+	    	</div>
+	    </div>
+	</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'security/loginbase.html.twig' %}
+
+{% block body %}
+	<div class="errorPage">
+	    <div class="fl">
+	    	<div>
+	    		<img src="images/zampa-500.jpg" width=200 height=200></a>
+	    	</div>
+	    	<div>
+	    		<h1> 404 </h1>
+	    		<p>Mi dispiace, ma non sono riuscito a trovare quello che stavi cercando!</p>
+	    		<p><a href="{{ path('map') }}">Torna alla home!</a></p>
+	    	</div>
+	    </div>
+	</div>
+{% endblock %}

@@ -26,8 +26,8 @@ class BanListener
 		$path = $request->getPathInfo();
 		if($path != "/login" && $path != "/banned")
 		{
+			if($this->sam->getToken() == null) return;
 	        $user = $this->sam->getToken()->getUser();
-			
 			if ($user->getBanned()) {
 				$url = $this->router->generate("banned");
 				$response = new RedirectResponse($url);

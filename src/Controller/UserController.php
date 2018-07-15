@@ -10,6 +10,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Filesystem\Filesystem;
+use App\Entity\DescriptionLog;
+use App\Entity\NicknameLog;
+use App\Entity\PropicLog;
 use App\Form\ProfileType;
 use App\Entity\Propic;
 use App\Entity\User;
@@ -37,8 +40,11 @@ class UserController extends Controller
 	 */
 	public function editAction(Request $request)
 	{
+        $user = $this->getUser();
+        $oldNickname = $user->getNickname();
+        $oldDescription = $user->getDescription();
 		$em = $this->getDoctrine()->getManager();
-        $form = $this->createForm(ProfileType::class, $this->getUser(), array(
+        $form = $this->createForm(ProfileType::class, $user, array(
             "validation_groups" => array("profile")
         ));
 
@@ -46,6 +52,25 @@ class UserController extends Controller
 		$form->handleRequest($request);
 		if($form->isSubmitted()) {
 			if($form->isValid()) {
+                if($user->getNickname() != $oldNickname) {
+                    $log = (new NicknameLog())
+                        ->setSource($user)
+                        ->setDate(new \DateTime())
+                        ->setOldNickname($oldNickname)
+                        ->setNewNickname($user->getNickname())
+                    ;
+                    $em->persist($log);
+                }
+
+                if($user->getDescription() != $oldDescription) {
+                    $log = (new DescriptionLog())
+                        ->setSource($user)
+                        ->setDate(new \DateTime())
+                        ->setOldDescription($oldDescription)
+                        ->setNewDescription($user->getDescription())
+                    ;
+                    $em->persist($log);
+                }
                 $em->flush();
     		    return $this->redirectToRoute("map");
             } else {
@@ -105,7 +130,6 @@ class UserController extends Controller
 
                 foreach($errors as $error) 
                 {
-                    dump($error);
                     $this->addFlash('notice' , $error->getMessage());
                 }
             }
@@ -145,7 +169,6 @@ class UserController extends Controller
                 $dirPath = $this->getParameter('propic_directory');
                 $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
 
-                // moves the file to the directory where brochures are stored
                 $file->move(
                     $dirPath,
                     $fileName
@@ -155,12 +178,15 @@ class UserController extends Controller
                     $fileSystem->remove($dirPath . $user->getPropic());
                 }
                 
+                $propicLog = (new PropicLog())
+                    ->setSource($user)
+                    ->setDate(new \DateTime())
+                    ->setOldPropic($user->getPropic())
+                    ->setNewPropic($fileName);
+                ;
 
-                // updates the 'brochure' property to store the PDF file name
-                // instead of its contents
+                $em->persist($propicLog);
                 $user->setPropic($fileName);
-
-                // ... persist the $product variable or any other work
                 $em->flush();
 
                 return $this->redirect($this->generateUrl('profile'));
@@ -169,7 +195,6 @@ class UserController extends Controller
 
                 foreach($errors as $error) 
                 {
-                    dump($error);
                     $this->addFlash('notice' , $error->getMessage());
                 }
             }

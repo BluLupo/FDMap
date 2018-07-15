@@ -89,9 +89,25 @@ class FDUser implements UserInterface, \Serializable
     private $permanentBan = false;
 
     /**
-     * @ORM\Column(name="ban_reason", type="string", nullable=false)
+     * @ORM\Column(name="ban_reason", type="string", nullable=true)
      */
     private $banReason;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Log", mappedBy="source")
+     */
+    private $sourceLogs;
+
+    /**
+     * @ORM\OneToMany(targetEntity="BanLog", mappedBy="target")
+     */
+    private $targetLogs;
+
+    public function __construct()
+    {
+        $this->sourceLogs = new \ArrayCollection();
+        $this->targetLogs = new \ArrayCollection();
+    }
 
 	public function getSalt()
 	{
@@ -306,4 +322,33 @@ class FDUser implements UserInterface, \Serializable
         return $this;
     }
 
+    public function addSourceLog($sourceLog)
+    {
+        $this->sourceLogs->add($sourceLog);
+    }
+
+    public function removeSourceLog($sourceLog)
+    {
+        $this->sourceLogs->remove($sourceLog);
+    }
+
+    public function getSourceLogs()
+    {
+        return $this->sourceLogs;
+    }
+
+    public function addTargetLog($targetLog)
+    {
+        $this->targetLogs->add($targetLog);
+    }
+
+    public function removeTargetLog($targetLog)
+    {
+        $this->targetLogs->remove($targetLog);
+    }
+
+    public function getTargetLogs()
+    {
+        return $this->targetLogs;
+    }
 }

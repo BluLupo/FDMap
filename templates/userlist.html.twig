@@ -1,9 +1,9 @@
 {% extends 'sidenav.html.twig' %}
 
 {% block sidenav_options %}
-	<p onclick="map()">Torna alla mappa</p>
-	<p onclick="profile()">Profilo</p>
-	<p onclick="logout()" id="logout">Logout</p>
+    <p onclick="logs()">Logs</p>
+    <p onclick="map()">Torna alla mappa</p>
+    <p onclick="logout()" id="logout">Logout</p>
 {% endblock %}
 
 {% block modals %}
@@ -151,6 +151,11 @@
         function map() {
             $(".loader").fadeIn();
             document.location.href = "{{ path('map') }}";
+        }
+
+        function logs() {
+            $(".loader").fadeIn();
+            document.location.href = "{{ path('logs') }}";
         }
 
         function removePropic() {

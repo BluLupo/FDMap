@@ -6,121 +6,41 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use App\Form\PunishType;
 use App\Entity\FDUser;
+use App\Form\LogType;
 
 /**
- * @Route("/admin/user")
+ * @Route("/admin")
  */
 class AdminController extends Controller
 {
-    /**
-     * @Route("/list", name="users_list")
+	/**
+     * @Route("/logs", name="logs")
      */
-    public function usersListAction(Request $request)
+    public function logsAction(Request $request)
     {
+        //patata =sv0h0sr
+    	$category = "null";
+        $categoryData = null;
         $em = $this->getDoctrine()->getManager();
-
-        $users = $em->getRepository("App:FDUser")->findAll();
-
-        return $this->render("userlist.html.twig", array(
-            "users" => $users
-        ));
-    }
-
-    /**
-     * @Route("/{user}/removeDescription")
-     */
-    public function deleteDescriptionAction(Request $request, FDUser $user)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $user->setDescription(null);
-        $em->flush();
-        return $this->redirectToRoute("users_list"); 
-    }
-
-    /**
-     * @Route("/{user}/removeNickname")
-     */
-    public function deleteNicknameAction(Request $request, FDUser $user)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $user->setNickname($user->getLogin());
-        $em->flush();
-        return $this->redirectToRoute("users_list"); 
-    }
-
-    /**
-     * @Route("/{user}/removeProfilePicture")
-     */
-    public function deletePropicAction(Request $request, FDUser $user)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $user->setPropic(null);
-        $em->flush();
-        return $this->redirectToRoute("users_list"); 
-    }
-
-    /**
-     * @Route("/{user}/punish")
-     */
-    public function punishAction(Request $request, FDUser $user)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $form = $this->createForm(PunishType::class, $user, array(
-            "validation_groups" => array("ban")
-        ));
-        $form->handleRequest($request);
-        $err = null;
-        if($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $user->setBanned(true);
-                $em->flush();
-                return $this->redirectToRoute("users_list"); 
-            } else {
-                $errors = $form->getErrors(true);
-
-                foreach($errors as $error) 
-                {
-                    $err = $error;
-                }
+    	$form = $this->createForm(LogType::class);
+    	$form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $data = $form->getData();
+            $category = $data['category'];
+            switch($category) 
+            {
+                case "description": $categoryData = $em->getRepository("App:DescriptionLog")->findAll();break;
+                case "nickname": $categoryData = $em->getRepository("App:NicknameLog")->findAll();break;
+                case "propic": $categoryData = $em->getRepository("App:PropicLog")->findAll();break;
+                case "ban": $categoryData = $em->getRepository("App:BanLog")->findAll();break; 
             }
-        }
-
-        return $this->render("punish.html.twig", array(
-            "form" => $form->createView(),
-            "error" => $err
+    	}
+        return $this->render("logs.html.twig", array(
+        	"form" => $form->createView(),
+            "data" => $categoryData,
+            "logtype" => $category
         ));
-    }
-
-    /**
-     * @Route("/{user}/pardon")
-     */
-    public function pardonAction(Request $request, FDUser $user)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $user
-            ->setBanned(false)
-            ->setPermanentBan(false)
-            ->setEndDate(null)
-        ;
-        $em->flush();
-        return $this->redirectToRoute("users_list"); 
-    }
-
-    /**
-     * @Route("/{user}/promote/{role}")
-     */
-    public function promoteAction(Request $request, FDUser $user, $role)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $user
-            ->setRole($role)
-        ;
-        $em->flush();
-        return $this->redirectToRoute("users_list"); 
     }
 }

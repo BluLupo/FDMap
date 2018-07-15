@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\DBAL\Connection;
+use App\Entity\FDUser;
 
 class CredentialsService
 {

@@ -5,6 +5,7 @@ namespace App\Entity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,7 +28,7 @@ class FDUser implements UserInterface, \Serializable
     private $login;
 
     /**
-     * @ORM\Column(name="email", type="string")
+     * @ORM\Column(name="email", type="string", nullable=true)
      */
     private $email;
 
@@ -105,8 +106,8 @@ class FDUser implements UserInterface, \Serializable
 
     public function __construct()
     {
-        $this->sourceLogs = new ArrayCollection();
-        $this->targetLogs = new ArrayCollection();
+        $this->sourceLogs = new \ArrayCollection();
+        $this->targetLogs = new \ArrayCollection();
     }
 
 	public function getSalt()

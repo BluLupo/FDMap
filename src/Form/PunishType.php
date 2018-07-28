@@ -13,7 +13,8 @@ class PunishType extends AbstractType
         $builder
             ->add('endDate', Type\DateType::class, array(
             	"label" => "Fine ban",
-                "widget" => "single_text"
+                "widget" => "single_text",
+                "required" => false
             ))
             ->add('permanentBan', Type\CheckboxType::class, array(
             	"label" => "Ban permanente?",

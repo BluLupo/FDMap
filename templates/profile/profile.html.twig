@@ -1,10 +1,5 @@
 {% extends 'sidenav.html.twig' %}
 
-{% block sidenav_options %}
-	<p onclick="map()" id="map">Torna alla mappa</p>
-	<p onclick="logout()" id="logout">Logout</p>
-{% endblock %}
-
 {% block modals %}
 
 {% endblock %}
@@ -36,15 +31,6 @@
     </div>
 	<script>
         $(".loader").fadeIn();
-		function logout() {
-            $(".loader").fadeIn();
-			document.location.href = "{{ path('logout') }}";
-		}
-
-		function map() {
-            $(".loader").fadeIn();
-			document.location.href = "{{ path('map') }}";
-		}
 
 		function updateInfo() {
             $(".loader").fadeIn();

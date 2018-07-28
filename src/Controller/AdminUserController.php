@@ -77,7 +77,11 @@ class AdminUserController extends Controller
         $form->handleRequest($request);
         $err = null;
         if($form->isSubmitted()) {
-            if ($form->isValid()) {
+            $date = $user->getEndDate();
+            $permanent = $user->getPermanentBan();
+
+            dump(isset($date), !$permanent);
+            if(isset($date) xor $permanent and $form->isValid()) {
                 $banLog = (new BanLog())
                     ->setDate(new \DateTime())
                     ->setSource($this->getUser())

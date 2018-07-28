@@ -86,60 +86,6 @@ class UserController extends Controller
 		));
 	}
 
-	/**
-	 * @Route("/password/new", name="password_reset")
-	 */
-	public function newPasswordAction(Request $request)
-	{
-		$em = $this->getDoctrine()->getManager();
-    	$encoder = $this->container->get('security.password_encoder');
-
-    	$user = $this->getUser();		
-    	$form = $this->createFormBuilder()
-    		->add('nickname', Type\HiddenType::class, array(
-    			'data' => $user->getNickname()
-    		))
-    		->add('password', Type\PasswordType::class, array(
-                'required' => true,
-                'attr' => array(
-                    'placeholder' => "Password"
-                )
-            ))
-            ->add('password2', Type\PasswordType::class, array(
-                'required' => true,
-                'attr' => array(
-                    'placeholder' => "Ripeti password"
-                )
-            ))
-    		->add('submit', Type\SubmitType::class, array(
-                'label' => "Cambia"
-            ))
-    		->getForm();
-
-    	$form->handleRequest($request);
-        if($form->isSubmitted())
-        {
-            if($form->isValid()) 
-            {
-                $data = $form->getData();
-                $user->setPassword($encoder->encodePassword($user, $data['password']));
-                $em->flush();
-    		    return $this->redirectToRoute("profile");
-            } else {
-                $errors = $form->getErrors(true);
-
-                foreach($errors as $error) 
-                {
-                    $this->addFlash('notice' , $error->getMessage());
-                }
-            }
-    	}
-
-    	return $this->render('profile/editpwd.html.twig', array(
-    		'form' => $form->createView()
-    	));
-    }
-
     /**
      * @Route("/profile/upload-profile-image", name="upload-profile-image")
      */
@@ -148,6 +94,7 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
         $encoder = $this->container->get('security.password_encoder');
         $propic = new Propic();
+        $err = null;
 
         $user = $this->getUser();       
         $form = $this->createFormBuilder($propic)
@@ -157,8 +104,8 @@ class UserController extends Controller
             ->add('submit', Type\SubmitType::class, array(
                 'label' => "Cambia"
             ))
-            ->getForm();
-
+            ->getForm()
+        ;
         $form->handleRequest($request);
         if($form->isSubmitted())
         {
@@ -192,16 +139,15 @@ class UserController extends Controller
                 return $this->redirect($this->generateUrl('profile'));
             } else {
                 $errors = $form->getErrors(true);
-
-                foreach($errors as $error) 
-                {
-                    $this->addFlash('notice' , $error->getMessage());
+                foreach($errors as $error) {
+                    $err = $error;
                 }
             }
         }
 
         return $this->render('profile/editpropic.html.twig', array(
-            'form' => $form->createView()
+            'form' => $form->createView(),
+             "error" => $err
         ));
     }
 

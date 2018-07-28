@@ -1,27 +1,6 @@
 {% extends 'sidenav.html.twig' %}
 
-{% block sidenav_options %}
-	<p onclick="userList()">Torna alla lista</p>
-	<p onclick="profile()">Profilo</p>
-	<p onclick="logout()" id="logout">Logout</p>
-{% endblock %}
-
 {% block fd_body %}
-	<script>
-		function userList() {
-            $(".loader").fadeIn();
-            document.location.href = "{{ path('users_list') }}";
-        }
-        function logout() {
-            $(".loader").fadeIn();
-            document.location.href = "{{ path('logout') }}";
-        }
-
-        function map() {
-            $(".loader").fadeIn();
-            document.location.href = "{{ path('map') }}";
-        }
-	</script>
 	{% if error is not null %}
         <div class="container">
             <div class="alert alert-danger fade in alert-dismissable">

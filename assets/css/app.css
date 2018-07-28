@@ -155,6 +155,10 @@
     
 }
 
+.fd_sidenav_options {
+  cursor: default;
+}
+
 .fd_sidenav_logo {
     background: #212d3d;
     position: absolute;
@@ -576,4 +580,9 @@ html {
 {
   padding-left: 30px;
   padding-right: 30px;
+}
+
+.pac-container 
+{ 
+  z-index: 100000 !important; 
 }

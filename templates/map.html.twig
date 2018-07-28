@@ -12,20 +12,6 @@
     </style>
 {% endblock %}
 
-{% block sidenav_options %}
-	{% if marked %}
-		<p data-toggle="modal" data-target="#editModal">Cambia posizione</p>
-		<p data-toggle="modal" data-target="#deleteModal">Elimina posizione</p>
-	{% else %}
-		<p data-toggle="modal" data-target="#addModal">Fissa posizione</p>
-	{% endif %}
-	<p onclick="profile()">Profilo</p>
-	{% if is_granted("ROLE_ADMIN") %}
-		<p onclick="userList()">Pannello admin</p>
-	{% endif %}
-	<p onclick="logout()" id="logout">Logout</p>
-{% endblock %}
-
 {% block modals %}
 	<div class="modal fade" id="addModal" role="dialog">
 	    <div class="modal-dialog">
@@ -49,12 +35,10 @@
 	</div>
 	<div class="modal fade" id="noMarkerModal" role="dialog">
 	    <div class="modal-dialog">
-	    
-	      <!-- Modal content-->
 		    <div class="modal-content">
 		        <div class="modal-header">
 		          	<button type="button" class="close" data-dismiss="modal">&times;</button>
-		          	<h4 class="modal-title">Nessuna posizione impostato</h4>
+		          	<h4 class="modal-title">Nessuna posizione impostata</h4>
 		        </div>
 		        <div class="modal-body">
 		        	<p>Non hai ancora selezionato una posizione sulla mappa<p>
@@ -65,10 +49,24 @@
 		    </div>
 	    </div>
 	</div>
+	<div class="modal fade searchContainer" id="searchModal" role="dialog">
+	    <div class="modal-dialog">
+		    <div class="modal-content">
+		        <div class="modal-header">
+		          	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		          	<h4 class="modal-title">Cerca località</h4>
+		        </div>
+		        <div class="modal-body">
+		        	<input type="text" id="searchText" class="form-control">
+		        </div>
+		        <div class="modal-footer">
+		          	<button type="button" onclick="searchPlace()" class="btn btn-info" data-dismiss="modal">Cerca</button>
+		        </div>
+		    </div>
+	    </div>
+	</div>
 	<div class="modal fade" id="editModal" role="dialog">
 	    <div class="modal-dialog">
-	    
-	      <!-- Modal content-->
 		    <div class="modal-content">
 		        <div class="modal-header">
 		          	<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -86,8 +84,6 @@
 	</div>
 	<div class="modal fade" id="deleteModal" role="dialog">
 	    <div class="modal-dialog">
-	    
-	      <!-- Modal content-->
 		    <div class="modal-content">
 		        <div class="modal-header">
 		          	<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -112,21 +108,7 @@
 		var previousMarker = null;
 		var infoWindow 
 		var map = null;
-
-		function logout() {
-			$(".loader").fadeIn();
-			document.location.href = "{{ path('logout') }}";
-		}
-
-		function userList() {
-			$(".loader").fadeIn();
-			document.location.href = "{{ path('users_list') }}";
-		}
-
-		function profile() {
-			$(".loader").fadeIn();
-			document.location.href = "{{ path('profile') }}";
-		}
+		var searchBox = null;
 
 		function initMap() {
 
@@ -136,6 +118,7 @@
           			}
           		}
           	);
+
 			$.ajax({
                 url:'{{ (path('get_all_markers')) }}',
                 type: "GET",
@@ -151,9 +134,9 @@
 				          map: map,
 				        });
 				        if(elem.nickname == nickname) {
-				         	marker.setIcon('https://maps.google.com/mapfiles/ms/icons/green-dot.png')
+				         	marker.setIcon('https://maps.google.com/mapfiles/ms/icons/green-dot.png');
 				        } else {
-				        	marker.setIcon('https://maps.google.com/mapfiles/ms/icons/purple-dot.png')
+				        	marker.setIcon('https://maps.google.com/mapfiles/ms/icons/purple-dot.png');
 
 				        }
 				        marker.addListener('click', function() {
@@ -176,11 +159,28 @@
                 }
             });
 
+	 		var input = document.getElementById('searchText');
+	        searchBox = new google.maps.places.SearchBox(input);
+
+	      
 
 	        map.addListener('click', function(e) {
 	          	placeMarkerAndPanTo(e.latLng, map);
 	        });
+		   	var opt = { minZoom: 4, maxZoom: 22 };
+	 		map.setOptions(opt);
       	}
+
+        function searchPlace() {
+	        var places = searchBox.getPlaces();
+
+	        if (places.length == 0) {
+	            return;
+	        }
+
+	        placeMarkerAndPanTo(places[0].geometry.location, map)
+	    };
+
 
 	    function placeMarkerAndPanTo(latLng, map) {
 	    	if (previousMarker)
@@ -249,6 +249,6 @@
         }
     </script>
     <script async defer
-   		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyEDy7B__fUUmJsMDaoLGUrClpCmbQPic&callback=initMap">
+   		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyEDy7B__fUUmJsMDaoLGUrClpCmbQPic&callback=initMap&libraries=places">
     </script>
 {% endblock %}

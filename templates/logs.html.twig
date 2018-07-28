@@ -1,26 +1,10 @@
 {% extends 'sidenav.html.twig' %}
 
-{% block sidenav_options %}
-    <p onclick="admin()">Torna al pannello</p>
-    <p onclick="logout()" id="logout">Logout</p>
-{% endblock %}
-
 {% block title %}
 	Logs
 {% endblock %}
 
 {% block fd_body %}
-	<script>
-		function logout() {
-            $(".loader").fadeIn();
-            document.location.href = "{{ path('logout') }}";
-        }
-
-        function admin() {
-            $(".loader").fadeIn();
-            document.location.href = "{{ path('users_list') }}";
-        }
-	</script>
 	<div class="title">
 		Logs
 	</div>

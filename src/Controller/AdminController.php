@@ -19,7 +19,6 @@ class AdminController extends Controller
      */
     public function logsAction(Request $request)
     {
-        //patata =sv0h0sr
     	$category = "null";
         $categoryData = null;
         $em = $this->getDoctrine()->getManager();

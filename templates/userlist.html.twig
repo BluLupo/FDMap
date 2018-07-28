@@ -1,11 +1,5 @@
 {% extends 'sidenav.html.twig' %}
 
-{% block sidenav_options %}
-    <p onclick="logs()">Logs</p>
-    <p onclick="map()">Torna alla mappa</p>
-    <p onclick="logout()" id="logout">Logout</p>
-{% endblock %}
-
 {% block modals %}
     <div class="modal fade" id="pardonModal" role="dialog">
         <div class="modal-dialog">
@@ -139,24 +133,6 @@
               ]
             });
         } );
-        function profile() {
-            $(".loader").fadeIn();
-            document.location.href = "{{ path('profile') }}";
-        }
-        function logout() {
-            $(".loader").fadeIn();
-            document.location.href = "{{ path('logout') }}";
-        }
-
-        function map() {
-            $(".loader").fadeIn();
-            document.location.href = "{{ path('map') }}";
-        }
-
-        function logs() {
-            $(".loader").fadeIn();
-            document.location.href = "{{ path('logs') }}";
-        }
 
         function removePropic() {
             $(".loader").fadeIn();

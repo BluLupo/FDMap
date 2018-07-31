@@ -5,16 +5,14 @@
 {% endblock %}
     
 {% block body %}
-    {% if error %}
-        <div class="container">
-            <div class="alert alert-danger fade in alert-dismissable">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                {{ error.messageKey|trans(error.messageData, 'security') }}
-            </div>
-        </div>
-    {% endif %}
     <div class='fd_login-page'>
         <div class='fd_form'>
+            {% if error %}
+                <div class="alert alert-danger fade in alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
             <div class='fd_form-logo'> 
                 <div><img style="vertical-align:middle;" src=" {{ asset('images/logo.png') }}" width="150" height="150"/></div>
             </div>

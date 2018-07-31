@@ -57,7 +57,7 @@
 		          	<h4 class="modal-title">Cerca località</h4>
 		        </div>
 		        <div class="modal-body">
-		        	<input type="text" id="searchText" class="form-control">
+		        	<input type="text" id="searchText" class="form-control" placeholder="Inserisci località o indirizzo...">
 		        </div>
 		        <div class="modal-footer">
 		          	<button type="button" onclick="searchPlace()" class="btn btn-info" data-dismiss="modal">Cerca</button>
@@ -167,7 +167,7 @@
 	        map.addListener('click', function(e) {
 	          	placeMarkerAndPanTo(e.latLng, map);
 	        });
-		   	var opt = { minZoom: 4, maxZoom: 22 };
+		   	var opt = { minZoom: 3, maxZoom: 22 };
 	 		map.setOptions(opt);
       	}
 
@@ -189,9 +189,23 @@
 	        	position: latLng,
 	        	map: map
 	      	});
-			previousMarker.setIcon('https://maps.google.com/mapfiles/ms/icons/red-dot.png')
-	        map.panTo(latLng);
+	      	map.panTo(latLng);
+			previousMarker.setIcon('https://maps.google.com/mapfiles/ms/icons/red-dot.png');
+	        smoothZoom(map, 16, map.getZoom());
 	    }
+
+	    function smoothZoom (map, max, cnt) {
+		    if (cnt >= max) {
+		        return;
+		    }
+		    else {
+		        z = google.maps.event.addListener(map, 'zoom_changed', function(event){
+		            google.maps.event.removeListener(z);
+		            smoothZoom(map, max, cnt + 1);
+		        });
+		        setTimeout(function(){map.setZoom(cnt)}, 120); 
+		    }
+		}  
 
 	    function saveMarker() {
 	    	if(previousMarker == null) {

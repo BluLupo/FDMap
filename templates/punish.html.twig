@@ -1,18 +1,16 @@
 {% extends 'sidenav.html.twig' %}
 
 {% block fd_body %}
-	{% if error is not null %}
-        <div class="container">
-            <div class="alert alert-danger fade in alert-dismissable">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                {{ error.getMessage() }}
-            </div>
-        </div>
-	{% endif %}
 	<div class="title">
 		Punisci utente
 	</div>
 	<div class="fd_list">
+		{% if error is not null %}
+            <div class="alert alert-danger fade in alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{ error.getMessage() }}
+            </div>
+		{% endif %}
 		{{ form_start(form) }}
 			<div class="form-group">
 				{{ form_label(form.endDate) }}<br>

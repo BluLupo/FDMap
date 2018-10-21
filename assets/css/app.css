@@ -73,11 +73,11 @@
 }
 
 @media screen and (max-width: 700px) {
-    .fd_login-page {
-      width: 80%;
-      padding: 8% 0 0;
-      margin: auto;
-    }
+  .fd_login-page {
+    width: 80%;
+    padding: 8% 0 0;
+    margin: auto;
+  }
 
     .fd_sidenav {
         height: 100%;
@@ -122,11 +122,11 @@
 }
 
 @media screen and (min-width: 701px) {
-    .fd_login-page {
-      width: 360px;
-      padding: 8% 0 0;
-      margin: auto;
-    }
+  .fd_login-page {
+    width: 360px;
+    padding: 8% 0 0;
+    margin: auto;
+  }
 
     .fd_sidenav {
         height: 100%;
@@ -153,28 +153,28 @@
         display: none;
     }   
     
-}
+  }
 
-.fd_sidenav_options {
-  cursor: default;
-}
-
-.fd_sidenav_logo {
-    background: #212d3d;
-    position: absolute;
-    top: 0%;
-    left: 0px;
-    width: 100%;
-    margin: 0 auto;
-    font-family: "Kaushan Script", serif, cursive!important;
-    font-size:15px;
-    text-align: center;
-}
+  .fd_sidenav_options {
+    cursor: default;
+  }
+  
+    .fd_sidenav_logo {
+      background: #212d3d;
+        position: absolute;
+        top: 0%;
+        left: 0px;
+        width: 100%;
+        margin: 0 auto;
+        font-family: "Kaushan Script", serif, cursive!important;
+        font-size:15px;
+        text-align: center;
+    }
 
 @media screen and (max-width: 1000px) {
     .fd_profile {
-        font-size: 12px;
-        width: 80%;
+      font-size: 12px;
+      width: 80%;
         padding: 4% 0 0;
         margin: auto;
         text-align: center;
@@ -204,7 +204,7 @@
         text-align: center;
         box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     }
-
+    
     .bold-data {
       font-weight: bold;
       font-size: 14px;
@@ -526,6 +526,17 @@
 .fd_container .fd_info span .fa {
   color: #EF3B3A;
 }
+
+.fd-socials thead th {
+  color: white;
+  background-color: #1a4c8a;
+  text-align: center!important;
+}
+
+.fd-socials {
+  text-align: center!important;
+}
+
 .blue-bg {
   margin:0;
   background-attachment: fixed;
@@ -536,7 +547,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;    
           min-height: 100%;  
-}
+}      
 
 
 html {

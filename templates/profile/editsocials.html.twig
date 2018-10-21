@@ -1,0 +1,24 @@
+{% extends 'sidenav.html.twig' %}
+
+{% block modals %}
+
+{% endblock %}
+
+{% block fd_body%}
+	<div class="title">Modifica socials</div>
+	<div class='fd_login-page'>
+		{% if error is not null %}
+	        <div class="alert alert-danger fade in alert-dismissable">
+	            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	            {{ error.getMessage() }}
+	        </div>
+		{% endif %}
+        <div class='fd_form'>
+			{{ form_start(form) }}
+			{{ form_end(form) }}
+		</div>
+	</div>
+	<script>
+		$(".loader").fadeOut();
+	</script>
+{% endblock %}

@@ -85,8 +85,8 @@ class AdminUserController extends Controller
                 $banLog = (new BanLog())
                     ->setDate(new \DateTime())
                     ->setSource($this->getUser())
-                    ->setEndDate($user->getEndDate())
-                    ->setBanReason($user->getBanReason())
+                    ->setEndBan($user->getEndDate())
+                    ->setBanNotes($user->getBanReason())
                     ->setPermanentBan($user->getPermanentBan())
                     ->setTarget($user)
                 ;

@@ -16,14 +16,14 @@ class BanLog extends Log
 	private $target;
 
 	/**
+	 * @ORM\Column(name="end_ban", type="date", nullable=true)
+	 */
+	private $endBan;
+	
+	/**
 	 * @ORM\Column(name="permanent_ban", type="boolean", nullable=true)
 	 */
 	private $permanentBan;
-
-	/**
-	 * @ORM\Column(name="new_nickname", type="string", nullable=true)
-	 */
-	private $endBan;
 
 	/**
 	 * @ORM\Column(name="ban_notes", type="string", nullable=true)
@@ -32,14 +32,14 @@ class BanLog extends Log
 
 	public function setTarget($target)
 	{
-		$this->$target = $target;
+		$this->target = $target;
 
 		return $this;
 	}
 
 	public function getTarget()
 	{
-		return $this->$target;
+		return $this->target;
 	}
 
 	public function setEndBan($endBan)
@@ -52,6 +52,18 @@ class BanLog extends Log
 	public function getEndBan()
 	{
 		return $this->endBan;
+	}
+
+	public function setPermanentBan($permanentBan)
+	{
+		$this->permanentBan = $permanentBan;
+
+		return $this;
+	}
+
+	public function getPermanentBan()
+	{
+		return $this->permanentBan;
 	}
 
 	public function setBanNotes($banNotes)

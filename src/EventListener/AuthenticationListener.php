@@ -8,14 +8,18 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Services\CredentialsService; 
+use App\Services\UserService;
 
 class AuthenticationListener
 {
 	protected $credentialsService;
 
-	public function __construct(CredentialsService $credentialsService)
+	protected $userService;
+
+	public function __construct(CredentialsService $credentialsService, UserService $userService)
 	{
 		$this->credentialsService = $credentialsService;
+		$this->userService = $userService;
 	}
 
 	/**
@@ -39,6 +43,9 @@ class AuthenticationListener
 	public function onAuthenticationSuccess( InteractiveLoginEvent $event)
     {
     	$login = $event->getRequest()->request->all()['_username'];
-        $this->credentialsService->updateCredentials($login);
+		$this->credentialsService->updateCredentials($login);
+		
+
+		$this->userService->checkSocials($event->getAuthenticationToken()->getUser());
     }
 }

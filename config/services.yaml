@@ -30,6 +30,10 @@ services:
             $fdConn: '@doctrine.dbal.furryden_connection'
             $mapEM: '@doctrine.orm.entity_manager'
 
+    App\Services\UserService:
+        arguments:
+            $em: '@doctrine.orm.entity_manager'
+
     app.security.authentication_failure_event_listener:
         class: App\EventListener\AuthenticationListener
         tags:

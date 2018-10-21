@@ -22,7 +22,7 @@ class FDUser implements UserInterface, \Serializable
 	 */
 	private $id;
 
-    /**
+/**
      * @ORM\Column(name="login", type="string", unique=true)
      */
     private $login;
@@ -42,7 +42,7 @@ class FDUser implements UserInterface, \Serializable
      * @Assert\Length(
      *      max = 255,
      *      maxMessage = "La descrizione non può superare i 255 caratteri",
-     *      groups = {"profile"}
+     *      groups = {"profile"}     
      * )
      */
     private $description;
@@ -62,8 +62,8 @@ class FDUser implements UserInterface, \Serializable
 	/**
 	 * @ORM\OneToOne(targetEntity="Marker", mappedBy="user")
 	 */
-	private $marker;
-
+    private $marker;
+    
     /**
      * @ORM\Column(name="role", type="string")
      */
@@ -103,6 +103,11 @@ class FDUser implements UserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="BanLog", mappedBy="target")
      */
     private $targetLogs;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Socials", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $socials;
 
     public function __construct()
     {
@@ -273,7 +278,7 @@ class FDUser implements UserInterface, \Serializable
     {
         return $this->role;
     }
-
+    
     public function getRoles()
     {
         return array("ROLE_" . strtoupper($this->role));
@@ -351,5 +356,22 @@ class FDUser implements UserInterface, \Serializable
     public function getTargetLogs()
     {
         return $this->targetLogs;
+    }
+
+    public function getSocials(): ?Socials
+    {
+        return $this->socials;
+    }
+
+    public function setSocials(Socials $socials): self
+    {
+        $this->socials = $socials;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $socials->getUser()) {
+            $socials->setUser($this);
+        }
+
+        return $this;
     }
 }

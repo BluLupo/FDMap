@@ -3,17 +3,33 @@
         <tr>
 		    <td>Utente</td>
 		    <td>Data</td>
-		    <td>Vecchia descrizione</td>
-		    <td>Nuova descrizione</td>
+		    <td>Admin</td>
+            <td>Termine ban</td>
+            <td>Ban permanente?</td>
+            <td>Note</td>
         </tr>
     </thead>
     <tbody>
         {% for d in data %}
 			<tr>
-				<td class="centered">{{ d.source.login }}</td>
+				<td class="centered">{{ d.target.login }}</td>
                 <td class="centered">{{ d.date|date("d/m/Y h:i A") }}</td>
-                <td class="centered">{{ d.oldDescription }}</td>
-				<td class="centered">{{ d.newDescription }}</td>
+                <td class="centered">{{ d.source.login }}</td>
+                <td class="centered">
+                    {% if d.permanentBan %}
+                        -
+                    {% else %}
+                        {{ d.endBan|date("d/m/Y h:i A") }}
+                    {% endif %}
+                </td>
+                <td class="centered">
+                    {% if(d.permanentBan) %}
+                        <i class="fa fa-check" style="color:green"></i> 
+                    {% else %}
+                        <i class="fa fa-times" style="color:red"></i> 
+                    {% endif %}
+                </td>
+                <td class="centered">{{ d.banNotes }}</td>
 			</tr>
 	    {% endfor %}
     </tbody>

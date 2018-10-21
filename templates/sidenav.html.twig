@@ -3,15 +3,15 @@
 {% block body %}
 	<div class="fd_main">
 		<div id="menuButton" class="circle" onclick="toggleMenu(this)">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
-        </div>
+	            <div class="bar1"></div>
+	            <div class="bar2"></div>
+	            <div class="bar3"></div>
+	    </div>
 		<div class="fd_sidenav" id="sidenav_menu">
 			<div class="fd_sidenav_logo">
 				<div><img onclick="furryden()" src=" {{ asset('images/maplogo.png') }}" width="200" height="77"/></div>
 			</div>
-	        <div class="fd_sidenav-elements">
+			<div class="fd_sidenav-elements">
 				<div class="fd_sidenav_options">
 					{% if app.request.get('_route') == 'map' %}
 						{% if marked %}
@@ -86,6 +86,6 @@
         function map() {
             $(".loader").fadeIn();
             document.location.href = "{{ path('map') }}";
-        }
+        }		
 	</script>
 {% endblock %}

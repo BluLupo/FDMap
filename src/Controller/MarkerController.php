@@ -13,7 +13,7 @@ use App\Form\MarkerType;
 use App\Entity\Marker;
 
 /**
- - @Route("/marker")
+ * @Route("/marker")
  */
 class MarkerController extends Controller
 {
@@ -28,6 +28,7 @@ class MarkerController extends Controller
 		foreach($markers as $marker) {
 			$user = $marker->getUser();
 			array_push($result, array(
+				'id' => $user->getId(),
 				'latitude' => $marker->getLatitude(),
 				'longitude' => $marker->getLongitude(),
 				'nickname' => $user->getNickname(),

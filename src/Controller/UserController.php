@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use Symfony\Component\Form\Extension\Core\Type;
 
-use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,8 +13,9 @@ use App\Entity\DescriptionLog;
 use App\Entity\NicknameLog;
 use App\Entity\PropicLog;
 use App\Form\ProfileType;
+use App\Form\SocialsType;
 use App\Entity\Propic;
-use App\Entity\User;
+use App\Entity\FDUser;
 
 /**
  * @Route("/user")
@@ -31,9 +31,48 @@ class UserController extends Controller
 		$path = "/images/propics/" . (($user->hasPropic())?$user->getPropic():"default.png");
 		return $this->render("profile/profile.html.twig", array(
 			"user" => $user,
-            "propic" => $path
+            "propic" => $path,
 		));		
-	}
+    }
+
+    /**
+	 * @Route("/profile/view/{user}", name="profile_user")
+	 */
+	public function userProfileAction(Request $request, FDUser $user)
+	{
+		$path = "/images/propics/" . (($user->hasPropic())?$user->getPropic():"default.png");
+		return $this->render("profile/userprofile.html.twig", array(
+			"user" => $user,
+            "propic" => $path,
+		));		
+    }
+    
+    /**
+	 * @Route("/profile/editSocial", name="social_edit")
+	 */
+	public function socialAction(Request $request)
+	{
+        $err = null;
+        $user = $this->getUser();
+        $socials = $user->getSocials();
+
+        $form = $this->createForm(SocialsType::class, $socials, array());
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute("profile");
+        }
+
+        return $this->render("profile/editsocials.html.twig", array(
+            "socials" => $socials,
+            "user" => $user,
+            "form" => $form->createView(),
+            "error" => $err,
+        ));
+    }
 
 	/**
 	 * @Route("/profile/edit", name="profile_edit")
@@ -44,7 +83,7 @@ class UserController extends Controller
         $oldNickname = $user->getNickname();
         $oldDescription = $user->getDescription();
 		$em = $this->getDoctrine()->getManager();
-        $form = $this->createForm(ProfileType::class, $user, array(
+		$form = $this->createForm(ProfileType::class, $user, array(
             "validation_groups" => array("profile")
         ));
 
@@ -52,6 +91,8 @@ class UserController extends Controller
 		$form->handleRequest($request);
 		if($form->isSubmitted()) {
 			if($form->isValid()) {
+                $user = $this->getUser();
+            	$data = $form->getData();
                 if($user->getNickname() != $oldNickname) {
                     $log = (new NicknameLog())
                         ->setSource($user)
@@ -71,6 +112,9 @@ class UserController extends Controller
                     ;
                     $em->persist($log);
                 }
+				
+            	$user->setNickname($data['nickname']);
+            	$user->setDescription($data['description']);
                 $em->flush();
     		    return $this->redirectToRoute("map");
             } else {
@@ -81,10 +125,63 @@ class UserController extends Controller
             }
 		}
 		return $this->render("profile/editprofile.html.twig", array(
-			"form" => $form->createView(),
-            "error" => $err
+			"form" => $form->createView()
 		));
 	}
+
+	/**
+	 * @Route("/password/new", name="password_reset")
+	 */
+	public function newPasswordAction(Request $request)
+	{
+		$em = $this->getDoctrine()->getManager();
+    	$encoder = $this->container->get('security.password_encoder');
+
+    	$user = $this->getUser();		
+    	$form = $this->createFormBuilder()
+    		->add('nickname', Type\HiddenType::class, array(
+    			'data' => $user->getNickname()
+    		))
+    		->add('password', Type\PasswordType::class, array(
+                'required' => true,
+                'attr' => array(
+                    'placeholder' => "Password"
+                )
+            ))
+            ->add('password2', Type\PasswordType::class, array(
+                'required' => true,
+                'attr' => array(
+                    'placeholder' => "Ripeti password"
+                )
+            ))
+    		->add('submit', Type\SubmitType::class, array(
+                'label' => "Cambia"
+            ))
+    		->getForm();
+
+    	$form->handleRequest($request);
+        if($form->isSubmitted())
+        {
+            if($form->isValid()) 
+            {
+                $data = $form->getData();
+                $user->setPassword($encoder->encodePassword($user, $data['password']));
+                $em->flush();
+    		    return $this->redirectToRoute("profile");
+            } else {
+                $errors = $form->getErrors(true);
+
+                foreach($errors as $error) {
+                    $err = $error;
+                }
+            }
+    	}
+
+    	return $this->render('profile/editpwd.html.twig', array(
+            'form' => $form->createView(),
+            "error" => $err
+    	));
+    }
 
     /**
      * @Route("/profile/upload-profile-image", name="upload-profile-image")
@@ -124,7 +221,7 @@ class UserController extends Controller
                 if($user->hasPropic()) {
                     $fileSystem->remove($dirPath . $user->getPropic());
                 }
-                
+
                 $propicLog = (new PropicLog())
                     ->setSource($user)
                     ->setDate(new \DateTime())
@@ -147,7 +244,7 @@ class UserController extends Controller
 
         return $this->render('profile/editpropic.html.twig', array(
             'form' => $form->createView(),
-             "error" => $err
+            "error" => $err
         ));
     }
 

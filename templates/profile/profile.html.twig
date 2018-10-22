@@ -8,23 +8,19 @@
 	<div class="title">Profilo utente</div>
 	<div class='fd_profile'>
         <div class='fd_profile-content'>
-        	<div class="profilePicture grid-divider" style="width: 50%;">
-        		<p><img class="profilePic" src="{{ propic }}"></img></p>
-        		<p><button type="button" onclick="uploadPropic()" class="btn btn-info">Cambia immagine profilo</button></p>
-        	</div>
-        	<div class="profileInfo">
-        		<div class="profileInfoElems">
-        			<p>Nickname:</p>
-        			<p class="bold-data">{{ user.getNickname }}</p>
+        	<div>
+				<div class="propicName">
+        			<img class="profilePic" src="{{ propic }}"></img>
+					<i id="fd_profile_nickname">{{ user.getNickname }}</i>
+				</div>
+				<div class="profileInfoElems">
+        			<p>Bio: </p>
+        			<p class="bold-data">{{ user.getDescription }}</p>
         		</div>
         		<div class="profileInfoElems">
         			<p>Email: </p>
         			<p class="bold-data">{{ user.getEmail }}</p>
-        		</div>
-        		<div class="profileInfoElems">
-        			<p>Descrizione: </p>
-        			<p class="bold-data">{{ user.getDescription }}</p>
-        		</div>
+        		</div>        		
 				<div class="profileInfoElems">
 					{% set socials = user.socials %}
 					<p>Socials: </p>
@@ -51,6 +47,7 @@
 						</tbody>
 					</table>
 				</div>
+				<button type="button" onclick="uploadPropic()" class="btn btn-info">Cambia immagine profilo</button>
         		<button type="button" onclick="updateInfo()" class="btn btn-info">Aggiorna nickname e descrizione</button>
 				<button type="button" onclick="updateSocials()" class="btn btn-info">Aggiorna social</button>
         	</div>

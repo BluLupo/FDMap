@@ -72,7 +72,49 @@
   animation: ld-bounce 1s infinite;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1050px) {
+  .fd_profile {
+    font-size: 12px;
+    display: inline-block;
+    
+      padding: 4% 0 0;
+      margin: auto;
+      text-align: center;
+  } 
+
+  .profileInfoElems {
+    padding:10px;
+  }
+
+  .font_big {
+    font-size: 48px;
+  }
+
+
+  .profileInfo {
+      text-align:center;
+  }
+
+  .fd_profile-content {
+    width: 100%;
+      position: relative;
+      z-index: 1;
+      background: #FFFFFF;
+      margin: 0 auto 100px;
+      padding-top: 45px;
+      padding-bottom: 45px; 
+      text-align: center;
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  }
+  
+  .bold-data {
+    font-weight: bold;
+  }
+  
+  #propicbutton {
+    width: 80%;
+  }
+
   .fd_login-page {
     width: 80%;
     padding: 8% 0 0;
@@ -121,7 +163,7 @@
     }
 }
 
-@media screen and (min-width: 701px) {
+@media screen and (min-width: 1051px) {
   .fd_login-page {
     width: 360px;
     padding: 8% 0 0;
@@ -152,73 +194,10 @@
     #menuButton {
         display: none;
     }   
-    
-  }
 
-  .fd_sidenav_options {
-    cursor: default;
-  }
-  
-    .fd_sidenav_logo {
-      background: #212d3d;
-        position: absolute;
-        top: 0%;
-        left: 0px;
-        width: 100%;
-        margin: 0 auto;
-        font-family: "Kaushan Script", serif, cursive!important;
-        font-size:15px;
-        text-align: center;
-    }
-
-@media screen and (max-width: 1000px) {
-    .fd_profile {
-      font-size: 12px;
-      width: 80%;
-        padding: 4% 0 0;
-        margin: auto;
-        text-align: center;
-    } 
-
-    .profileInfoElems {
-      padding:10px;
-    }
-
-    .profilePicture {
-        width: 100%;
-        text-align: center;
-    }
-
-    .profileInfo {
-        text-align:center;
-    }
-
-    .fd_profile-content {
-        position: relative;
-        z-index: 1;
-        background: #FFFFFF;
-        width: 100%;
-        margin: 0 auto 100px;
-        padding-top: 45px;
-        padding-bottom: 45px; 
-        text-align: center;
-        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-    }
-    
-    .bold-data {
-      font-weight: bold;
-      font-size: 14px;
-    }
-    
-    #propicbutton {
-      width: 80%;
-    }
-}
-
-@media screen and (min-width: 1001px) {
     .fd_profile {
       font-size: 18px;
-      width: 60%;
+      width: 75%;
       padding: 4% 0 0;
       margin: auto;
       text-align: center;
@@ -251,9 +230,25 @@
 
     .bold-data {
       font-weight: bold;
-      font-size: 20px;
     }
-}
+    
+  }
+
+  .fd_sidenav_options {
+    cursor: default;
+  }
+  
+    .fd_sidenav_logo {
+      background: #212d3d;
+        position: absolute;
+        top: 0%;
+        left: 0px;
+        width: 100%;
+        margin: 0 auto;
+        font-family: "Kaushan Script", serif, cursive!important;
+        font-size:15px;
+        text-align: center;
+    }
 
 .fd_sidenav-elements {
   position: absolute;
@@ -307,8 +302,14 @@
 }
 
 .profilePic {
-    width:100px;
-    height:100px;
+    width:250px;
+    height:250px;
+    border-radius: 50%;
+    border:10px solid #1a4c8a;
+    border-radius: 500px;
+    -webkit-border-radius: 500px;
+    -moz-border-radius: 500px;
+    z-index: 10;
 }
 
 .grid-divider [class*='profile']:not(:last-child):after {
@@ -596,4 +597,23 @@ html {
 .pac-container 
 { 
   z-index: 100000 !important; 
+}
+
+#fd_profile_nickname {
+  padding-left: 20px;
+  font-size: 48px;
+  font-weight: bold;
+  border: 10px solid #1a4c8a;
+  border-radius: 0 25px 25px 0;
+  color: white;
+  background-color: #1a4c8a;
+  padding-right:15px;
+  z-index: -1;
+  vertical-align: middle;
+  margin-left: -14px;
+  display: inline-block;
+}
+
+.propicName {
+ display: inline-block;
 }

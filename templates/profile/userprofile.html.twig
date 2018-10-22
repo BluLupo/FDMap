@@ -8,16 +8,13 @@
 	<div class="title">Profilo di {{ user.nickname }}</div>
 	<div class='fd_profile'>
         <div class='fd_profile-content'>
-        	<div class="profilePicture grid-divider"  style="width: 50%;">
-        		<p><img class="profilePic" src="{{ propic }}"></img></p>
-        	</div>
-        	<div class="profileInfo">
-        		<div class="profileInfoElems">
-        			<p>Nickname:</p>
-        			<p class="bold-data">{{ user.getNickname }}</p>
-        		</div>
-        		<div class="profileInfoElems">
-        			<p>Descrizione: </p>
+			<div>
+				<div class="propicName">
+        			<img class="profilePic" src="{{ propic }}"></img>
+					<i id="fd_profile_nickname">{{ user.getNickname }}</i>
+				</div>
+				<div class="profileInfoElems">
+        			<p>Bio: </p>
         			<p class="bold-data">{{ user.getDescription }}</p>
         		</div>
 				<div class="profileInfoElems">
@@ -32,21 +29,21 @@
 							</tr>
 						</thead>
 						<tbody>
-                            {% if socials == null %}
+							{% if socials == null %}
 								<td></td>
 								<td></td>
 								<td></td>
 							{% else %}
-							    <tr>
-								    <td>{% if socials.fa != null %}<a target="_blank" href="https://www.furaffinity.net/user/{{socials.fa}}">{{socials.fa}}{% endif %}</td>
-								    <td>{% if socials.fa != null %}<a target="_blank" href="https://www.facebook.com/{{socials.facebook}}">{{socials.facebook}}{% endif %}</td>
-								    <td>{% if socials.fa != null %}<a target="_blank" href="https://t.me/{{socials.telegram}}">{{socials.telegram}}{% endif %}</td>							
-                                </tr>
-                            {% endif %}
-                        </tbody>
+								<tr>
+									<td>{% if socials.fa != null %}<a target="_blank" href="https://www.furaffinity.net/user/{{socials.fa}}">{{socials.fa}}{% endif %}</td>
+									<td>{% if socials.fa != null %}<a target="_blank" href="https://www.facebook.com/{{socials.facebook}}">{{socials.facebook}}{% endif %}</td>
+									<td>{% if socials.fa != null %}<a target="_blank" href="https://t.me/{{socials.telegram}}">{{socials.telegram}}{% endif %}</td>							
+								</tr>
+							{% endif %}
+						</tbody>
 					</table>
 				</div>
-        	</div>
+			</div>
         </div>
     </div>
 	<script>

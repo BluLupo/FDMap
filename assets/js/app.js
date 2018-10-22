@@ -10,7 +10,12 @@ require('bootstrap-sass');
 // require('bootstrap-sass/javascripts/bootstrap/popover');
 
 $(document).ready(function() {
-    $('[data-toggle="popover"]').popover();
+	$('[data-toggle="popover"]').popover();
+	var $window = $(window);
+
+	checkWidth(window);
+
+	$(window).resize(checkWidth);
 });
 
 function logout() {
@@ -23,4 +28,23 @@ function profile() {
 
 function userList() {
 	document.location.href = "/admin/user/list"
+}
+
+function checkWidth(window) {
+	var windowsize = $(window).width();
+    if (windowsize < 751) {
+		detabify();
+	} else {
+		tabify()
+	}
+}
+
+function detabify() {
+	var tables = $(document).find(".mobile-table").each(function(i, e) {
+		console.log(e);
+	})
+}
+
+function tabify() {
+
 }

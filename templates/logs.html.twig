@@ -23,7 +23,7 @@
 		<br>
 		<div>
 			{% if logtype == "description" %}
-					{% include "logs/description.html.twig" with{"data": data} %}
+				{% include "logs/description.html.twig" with{"data": data} %}
 			{% elseif logtype == "propic" %}
 				{% include "logs/propic.html.twig" with{"data": data} %}
 			{% elseif logtype == "nickname" %}

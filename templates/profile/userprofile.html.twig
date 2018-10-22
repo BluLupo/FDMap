@@ -25,21 +25,26 @@
 							<tr>
 								<th><i class="fa fa-paw"></i></th>
 								<th><i class="fa fa-facebook"></i></th>
-								<th><i class="fa fa-telegram"></i></th>
+								<th><i class="fa fa-instagram"></i></th>
+								<th><i class="fa fa-twitter"></i></th>
 							</tr>
 						</thead>
 						<tbody>
-							{% if socials == null %}
-								<td></td>
-								<td></td>
-								<td></td>
-							{% else %}
-								<tr>
-									<td>{% if socials.fa != null %}<a target="_blank" href="https://www.furaffinity.net/user/{{socials.fa}}">{{socials.fa}}{% endif %}</td>
-									<td>{% if socials.fa != null %}<a target="_blank" href="https://www.facebook.com/{{socials.facebook}}">{{socials.facebook}}{% endif %}</td>
-									<td>{% if socials.fa != null %}<a target="_blank" href="https://t.me/{{socials.telegram}}">{{socials.telegram}}{% endif %}</td>							
-								</tr>
-							{% endif %}
+							<tr>
+								{% if socials == null %}
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								{% else %}
+									<td>{% if socials.fa != null %}<a href="https://www.furaffinity.net/user/{{socials.fa}}">{{socials.fa}}{% endif %}</td>
+									<td>{% if socials.fa != null %}<a href="https://www.facebook.com/{{socials.facebook}}">{{socials.facebook}}{% endif %}</td>
+									<td>{% if socials.fa != null %}<a href="https://t.me/{{socials.telegram}}">{{socials.telegram}}{% endif %}</td>
+									<td>{% if socials.fa != null %}<a href="https://www.instagram.com/{{socials.instagram}}">{{socials.instagram}}{% endif %}</td>
+									<td>{% if socials.fa != null %}<a href="https://twitter.com/{{socials.twitter}}">{{socials.twitter}}{% endif %}</td>
+								{% endif %}
+							<tr>
 						</tbody>
 					</table>
 				</div>

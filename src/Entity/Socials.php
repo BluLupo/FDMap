@@ -37,6 +37,16 @@ class Socials
      */
     private $telegram;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $instagram;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $twitter;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +96,30 @@ class Socials
     public function setTelegram(?string $telegram): self
     {
         $this->telegram = $telegram;
+
+        return $this;
+    }
+
+    public function getInstagram(): ?string
+    {
+        return $this->instagram;
+    }
+
+    public function setInstagram(?string $instagram): self
+    {
+        $this->instagram = $instagram;
+
+        return $this;
+    }
+
+    public function getTwitter(): ?string
+    {
+        return $this->twitter;
+    }
+
+    public function setTwitter(?string $twitter): self
+    {
+        $this->twitter = $twitter;
 
         return $this;
     }

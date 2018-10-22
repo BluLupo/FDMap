@@ -1,0 +1,10 @@
+<div class="mobile-data">
+    {% for d in data %}
+		<div class="mobile-box">
+            <p>Utente: {{ d.source.login }} </p>
+		    <p>Data: {{ d.date|date("d/m/Y h:i A") }} </p>
+		    <p>Vecchia descrizione: {{ d.oldDescription }} </p>
+		    <p>Nuova descrizione: {{ d.newDescription }} </p>
+		</div>
+	{% endfor %}
+</div>

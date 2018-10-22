@@ -30,6 +30,8 @@
 								<th><i class="fa fa-paw"></i></th>
 								<th><i class="fa fa-facebook"></i></th>
 								<th><i class="fa fa-telegram"></i></th>
+								<th><i class="fa fa-instagram"></i></th>
+								<th><i class="fa fa-twitter"></i></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -38,18 +40,24 @@
 									<td></td>
 									<td></td>
 									<td></td>
+									<td></td>
+									<td></td>
 								{% else %}
 									<td>{% if socials.fa != null %}<a href="https://www.furaffinity.net/user/{{socials.fa}}">{{socials.fa}}{% endif %}</td>
 									<td>{% if socials.fa != null %}<a href="https://www.facebook.com/{{socials.facebook}}">{{socials.facebook}}{% endif %}</td>
 									<td>{% if socials.fa != null %}<a href="https://t.me/{{socials.telegram}}">{{socials.telegram}}{% endif %}</td>
+									<td>{% if socials.fa != null %}<a href="https://www.instagram.com/{{socials.instagram}}">{{socials.instagram}}{% endif %}</td>
+									<td>{% if socials.fa != null %}<a href="https://twitter.com/{{socials.twitter}}">{{socials.twitter}}{% endif %}</td>
 								{% endif %}
 							</tr>
 						</tbody>
 					</table>
 				</div>
-				<button type="button" onclick="uploadPropic()" class="btn btn-info">Cambia immagine profilo</button>
-        		<button type="button" onclick="updateInfo()" class="btn btn-info">Aggiorna nickname e descrizione</button>
-				<button type="button" onclick="updateSocials()" class="btn btn-info">Aggiorna social</button>
+				<div>
+        			<p><button type="button" onclick="updateInfo()" class="btn btn-info">Aggiorna nickname e descrizione</button></p>
+					<p><button type="button" onclick="uploadPropic()" class="btn btn-info">Cambia immagine profilo</button></p>
+					<p><button type="button" onclick="updateSocials()" class="btn btn-info">Aggiorna social</button></p>
+				</div>
         	</div>
         </div>
     </div>

@@ -32,6 +32,20 @@ class SocialsType extends AbstractType
                     "placeholder" => "t.me/",
                 )
             ))
+            ->add('instagram', Type\TextType::class, array(
+                "label" => "Instagram",
+                "required" => false,
+                "attr" => array(
+                    "placeholder" => "www.instagram.com/",
+                )
+            ))
+            ->add('twitter', Type\TextType::class, array(
+                "label" => "Twitter",
+                "required" => false,
+                "attr" => array(
+                    "placeholder" => "twitter.com/",
+                )
+            ))
             ->add('submit', Type\SubmitType::class, array(
             	"label" => "Conferma"
             ))

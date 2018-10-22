@@ -566,6 +566,7 @@
 }
 
 .fd-socials {
+  table-layout: fixed;
   text-align: center!important;
 }
 

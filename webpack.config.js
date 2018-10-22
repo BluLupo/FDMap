@@ -19,6 +19,7 @@ Encore
     .cleanupOutputBeforeBuild()
     .enableSourceMaps(!Encore.isProduction())
     .addEntry('app', './assets/js/app.js')
+    .addEntry('mobiletable', './assets/css/mobiletable.css')
     // uncomment to create hashed filenames (e.g. app.abc123.css)
     // .enableVersioning(Encore.isProduction())
 

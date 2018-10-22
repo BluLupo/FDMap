@@ -72,7 +72,38 @@
   animation: ld-bounce 1s infinite;
 }
 
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 750px) {
+  #fd_profile_nickname {
+    padding-left: 20px;
+    font-size: 48px;
+    font-weight: bold;
+    border: 10px solid #1a4c8a;
+    border-radius: 25px 25px 25px 25px;
+    color: white;
+    background-color: #1a4c8a;
+    padding-right:15px;
+    z-index: -1;
+  }
+}
+
+@media screen and (min-width: 751px) {
+  #fd_profile_nickname {
+    padding-left: 14px;
+    font-size: 48px;
+    font-weight: bold;
+    border: 10px solid #1a4c8a;
+    border-radius: 0 25px 25px 0;
+    color: white;
+    background-color: #1a4c8a;
+    padding-right:15px;
+    z-index: -1;
+    vertical-align: middle;
+    margin-left: -14px;
+    display: inline-block;
+  }
+}
+
+@media screen and (max-width: 900px) {
   .fd_profile {
     font-size: 12px;
     display: inline-block;
@@ -163,7 +194,7 @@
     }
 }
 
-@media screen and (min-width: 1051px) {
+@media screen and (min-width: 901px) {
   .fd_login-page {
     width: 360px;
     padding: 8% 0 0;
@@ -599,20 +630,7 @@ html {
   z-index: 100000 !important; 
 }
 
-#fd_profile_nickname {
-  padding-left: 20px;
-  font-size: 48px;
-  font-weight: bold;
-  border: 10px solid #1a4c8a;
-  border-radius: 0 25px 25px 0;
-  color: white;
-  background-color: #1a4c8a;
-  padding-right:15px;
-  z-index: -1;
-  vertical-align: middle;
-  margin-left: -14px;
-  display: inline-block;
-}
+
 
 .propicName {
  display: inline-block;

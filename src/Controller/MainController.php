@@ -20,10 +20,12 @@ class MainController extends Controller
 		$form = $this->createForm(MarkerType::class, $marker);
 		$marker = $this->getUser()->getMarker();
 		$marked = isset($marker);
+		$user = $this->getUser();
 		return $this->render("map.html.twig", array(
 			"form" => $form->createView(),
 			"marked" => $marked,
-			"nickname" => $this->getUser()->getNickname()
+			"nickname" => $user->getNickname(),
+			"propic" => "/images/propics/" . (($user->hasPropic())?$user->getPropic():"default.png"),
 		));
 	}
 

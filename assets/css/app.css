@@ -128,7 +128,6 @@
 
   .fd_profile-content {
     width: 100%;
-      position: relative;
       z-index: 1;
       background: #FFFFFF;
       margin: 0 auto 100px;
@@ -155,9 +154,8 @@
     .fd_sidenav {
         height: 100%;
         width: 0px;
-        position: fixed;
         z-index: 2;
-        top: 0px;
+        top: 75px;
         left: 0;
         background: #ffffff;
         overflow-x: hidden;
@@ -171,10 +169,6 @@
 
     #fd_body {
         text-align: center !important;
-        position:absolute !important;
-        top: 0px !important;
-        left: 0px !important;
-        right:0px !important;
         width:auto!important;
     }
 
@@ -204,9 +198,8 @@
     .fd_sidenav {
         height: 100%;
         width: 230px;
-        position: fixed;
         z-index: 1;
-        top: 0;
+        top: 75px;
         left: 0;
         background: #ffffff;
         overflow-x: hidden;
@@ -216,7 +209,7 @@
     #fd_body {
         text-align: center !important;
         position:absolute !important;
-        top: 0px !important;
+        top: 75px !important;
         left: 230px !important;
         right:0px !important;
         width:auto!important;
@@ -249,7 +242,6 @@
     }
 
     .fd_profile-content {
-      position: relative;
       z-index: 1;
       background: #FFFFFF;
       width: 100%;
@@ -269,20 +261,41 @@
     cursor: default;
   }
   
-    .fd_sidenav_logo {
+    .fd_sidenav_top {
       background: #212d3d;
-        position: absolute;
         top: 0%;
         left: 0px;
         width: 100%;
+        height: 75px;
         margin: 0 auto;
-        font-family: "Kaushan Script", serif, cursive!important;
         font-size:15px;
-        text-align: center;
+        display: flex;
+    }
+
+    .fd_sidenav_top_logo {
+      width: 200px!important;
+      margin-left: 15px;
+    }
+
+    .fd_sidenav_top_profile {
+      margin-top: 12px;
+      margin-left: auto;
+      margin-right: 15px;
+      color: white;
+    }
+
+    .fd_sidenav_top_hidenav {
+      color: white;
+      margin-left: 25px;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+
+    .fd_centerpart {
+      display: flex;
     }
 
 .fd_sidenav-elements {
-  position: absolute;
   top: 77px;
   width: 100%;
 }
@@ -305,6 +318,11 @@
 .change .bar3 {
     -webkit-transform: rotate(45deg) translate(-8px, -8px);
     transform: rotate(45deg) translate(-8px, -8px);
+}
+
+.change .fa {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .loader {
@@ -353,10 +371,6 @@
   bottom: 0;
   right: 0;
   min-height: 70px;
-}
-
-.container {
-  padding-top:1%;
 }
 
 .title {

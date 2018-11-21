@@ -3,38 +3,45 @@
 {% block body %}
 	<div class="fd_main">
 		<div id="menuButton" class="circle" onclick="toggleMenu(this)">
-	            <div class="bar1"></div>
-	            <div class="bar2"></div>
-	            <div class="bar3"></div>
-	    </div>
-		<div class="fd_sidenav" id="sidenav_menu">
-			<div class="fd_sidenav_logo">
-				<div><img onclick="furryden()" src=" {{ asset('images/maplogo.png') }}" width="200" height="77"/></div>
-			</div>
-			<div class="fd_sidenav-elements">
-				<div class="fd_sidenav_options">
-					{% if app.request.get('_route') == 'map' %}
-						{% if marked %}
-							<p data-toggle="modal" data-target="#editModal">Cambia posizione</p>
-							<p data-toggle="modal" data-target="#deleteModal">Elimina posizione</p>
-						{% else %}
-							<p data-toggle="modal" data-target="#addModal">Fissa posizione</p>
-						{% endif %}
-						<p data-toggle="modal" data-target="#searchModal">Cerca località</p>
-					{% endif %}
-					<p onclick="map()">Mappa</p>
-					<p onclick="profile()">Profilo</p>
-					{% if is_granted("ROLE_ADMIN") %}
-						<p onclick="userList()">Pannello admin</p>
-						<p onclick="logs()">Logs</p>
-					{% endif %}
-					<p onclick="logout()" id="logout">Logout</p>
-				</div>
+			<div class="bar1"></div>
+			<div class="bar2"></div>
+			<div class="bar3"></div>
+		</div>
+		<div class="fd_sidenav_top">
+			<div class="fd_sidenav_top_logo"><img onclick="furryden()" src=" {{ asset('images/maplogo.png') }}" width="200" height="77"/></div>
+			<div onclick="toggleMenu(this)" class="fd_sidenav_top_hidenav"><i class="fa fa-caret-left fa-2x"></i></div>
+			<div class="fd_sidenav_top_profile">
+				<img url="{{ propic }}" width=50 height=50></img>
+				{{ nickname }}
 			</div>
 		</div>
-		<div id="fd_body" class="blue-bg">
-			{% block fd_body %}
-			{% endblock %}
+		<div class="fd_centerpart">
+			<div class="fd_sidenav" id="sidenav_menu">
+				<div class="fd_sidenav-elements">
+					<div class="fd_sidenav_options">
+						{% if app.request.get('_route') == 'map' %}
+							{% if marked %}
+								<p data-toggle="modal" data-target="#editModal">Cambia posizione</p>
+								<p data-toggle="modal" data-target="#deleteModal">Elimina posizione</p>
+							{% else %}
+								<p data-toggle="modal" data-target="#addModal">Fissa posizione</p>
+							{% endif %}
+							<p data-toggle="modal" data-target="#searchModal">Cerca località</p>
+						{% endif %}
+						<p onclick="map()">Mappa</p>
+						<p onclick="profile()">Profilo</p>
+						{% if is_granted("ROLE_ADMIN") %}
+							<p onclick="userList()">Pannello admin</p>
+							<p onclick="logs()">Logs</p>
+						{% endif %}
+						<p onclick="logout()" id="logout">Logout</p>
+					</div>
+				</div>
+			</div>
+			<div id="fd_body" class="blue-bg">
+				{% block fd_body %}
+				{% endblock %}
+			</div>
 		</div>
 	</div>
 {% endblock %}
@@ -42,14 +49,16 @@
 {% block javascripts %}
 	{{ parent() }}
 	<script>
-        var isOpen=false;
+        var isOpen=true;
         function toggleMenu(x) {
             if(isOpen) {
                 isOpen = false;
                 document.getElementById("sidenav_menu").style.width="0px";
+				$("#fd_body").attr("style", "left: 0px!important; overflow: hidden");
             } else {
                 isOpen = true;
-                document.getElementById("sidenav_menu").style.width="280px";
+                document.getElementById("sidenav_menu").style.width="230px";
+				$("#fd_body").attr("style", "left: 230px!important; overflow: hidden");
             }
             x.classList.toggle("change");
         }

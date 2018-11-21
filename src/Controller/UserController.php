@@ -112,9 +112,6 @@ class UserController extends Controller
                     ;
                     $em->persist($log);
                 }
-				
-            	$user->setNickname($data['nickname']);
-            	$user->setDescription($data['description']);
                 $em->flush();
     		    return $this->redirectToRoute("map");
             } else {

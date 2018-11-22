@@ -8,33 +8,72 @@
 			<div class="bar3"></div>
 		</div>
 		<div class="fd_sidenav_top">
-			<div class="fd_sidenav_top_logo"><img onclick="furryden()" src=" {{ asset('images/maplogo.png') }}" width="200" height="77"/></div>
+			<div class="fd_sidenav_top_logo conditionalOpen" id="sidenav_top_logo"><img id="maplogo" onclick="furryden()" src=" {{ asset('images/maplogo.png') }}" width="200" height="77"/></div>
 			<div onclick="toggleMenu(this)" class="fd_sidenav_top_hidenav"><i class="fa fa-caret-left fa-2x"></i></div>
-			<div class="fd_sidenav_top_profile">
-				<img url="{{ propic }}" width=50 height=50></img>
-				{{ nickname }}
+			<div class="fd_sidenav_top_profile" onclick="profile()">
+				<img src="/images/propics/{{ app.user.propic }}" width=50 height=50></img>
+				{{ app.user.nickname }}
 			</div>
 		</div>
-		<div class="fd_centerpart">
-			<div class="fd_sidenav" id="sidenav_menu">
+		<div id="centerpart" class="fd_centerpart">
+			<div class="fd_sidenav conditionalOpen" id="sidenav_menu">
 				<div class="fd_sidenav-elements">
 					<div class="fd_sidenav_options">
 						{% if app.request.get('_route') == 'map' %}
 							{% if marked %}
-								<p data-toggle="modal" data-target="#editModal">Cambia posizione</p>
-								<p data-toggle="modal" data-target="#deleteModal">Elimina posizione</p>
+								<p data-toggle="modal" data-target="#editModal">
+									<i class="material-icons">
+										edit_location
+									</i>
+									Cambia posizione
+								</p>
+								<p data-toggle="modal" data-target="#deleteModal">
+									<i class="material-icons">
+										location_off
+									</i>
+									Elimina posizione
+								</p>
 							{% else %}
-								<p data-toggle="modal" data-target="#addModal">Fissa posizione</p>
+								<p data-toggle="modal" data-target="#addModal">
+									<i class="material-icons">
+										add_location
+									</i>
+									Fissa posizione
+								</p>
 							{% endif %}
-							<p data-toggle="modal" data-target="#searchModal">Cerca località</p>
+							<p data-toggle="modal" data-target="#searchModal">
+								<i class="material-icons">
+									search
+								</i>
+								Cerca località
+							</p>
 						{% endif %}
-						<p onclick="map()">Mappa</p>
-						<p onclick="profile()">Profilo</p>
+						<p onclick="map()">
+							<i class="material-icons">
+								map
+							</i>
+							Mappa
+						</p>
 						{% if is_granted("ROLE_ADMIN") %}
-							<p onclick="userList()">Pannello admin</p>
-							<p onclick="logs()">Logs</p>
+							<p onclick="userList()">
+								<i class="material-icons">
+									gavel
+								</i>
+								Pannello admin
+							</p>
+							<p onclick="logs()">
+								<i class="material-icons">
+									list
+								</i>
+								Logs
+							</p>
 						{% endif %}
-						<p onclick="logout()" id="logout">Logout</p>
+						<p onclick="logout()" id="logout">
+							<i class="material-icons">
+								exit_to_app
+							</i>
+							Logout
+						</p>
 					</div>
 				</div>
 			</div>
@@ -50,6 +89,10 @@
 	{{ parent() }}
 	<script>
         var isOpen=true;
+		$(document).ready(function() {
+			$("#sidenav_menu").height($("#fd_body").css("height"));
+			$("#map-canvas").height($("#fd_body").css("height"));
+		});
         function toggleMenu(x) {
             if(isOpen) {
                 isOpen = false;

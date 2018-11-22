@@ -1,17 +1,5 @@
 {% extends 'sidenav.html.twig' %}
 
-{% block stylesheets %}
-	{{ parent() }}
-	<style>
-      	#fd_body {
-        	position: absolute;
-    		top:0px;
-		   	bottom: 0;
-		    width: 100%;
-    	}
-    </style>
-{% endblock %}
-
 {% block modals %}
 	<div class="modal fade" id="addModal" role="dialog">
 	    <div class="modal-dialog">
@@ -112,7 +100,7 @@
 
 		function initMap() {
 
-        	map = new google.maps.Map(document.getElementById('fd_body'), {
+        	map = new google.maps.Map(document.getElementById('map-canvas'), {
           				zoom: 6,
           				center: {lat: 41.5325, lng: 12.2858 
           			}
@@ -157,7 +145,10 @@
 				          	infoWindow.open(map, marker);
 				        });
                     });
+					
+
                     $(".loader").fadeOut();
+					google.maps.event.trigger(map, "resize");
                 }
             });
 
@@ -267,4 +258,9 @@
     <script async defer
    		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyEDy7B__fUUmJsMDaoLGUrClpCmbQPic&callback=initMap&libraries=places">
     </script>
+{% endblock %}
+
+{% block fd_body %}
+	<div id="map-canvas">
+	</div>
 {% endblock %}

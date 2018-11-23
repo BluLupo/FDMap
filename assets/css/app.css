@@ -150,41 +150,6 @@
     padding: 8% 0 0;
     margin: auto;
   }
-
-    .fd_sidenav {
-        height: 100%;
-        width: 0px;
-        z-index: 2;
-        top: 75px;
-        left: 0;
-        background: #1a4c8a;
-        overflow-x: hidden;
-        transition:width 0.5s;
-        -moz-transition:width 0.5s; /* Firefox 4 */
-        -webkit-transition:width 0.5s; /* Safari and Chrome */
-        -o-transition:width 0.5s; /* Opera */
-    }
-
-
-    #fd_body {
-        text-align: center !important;
-        width:auto!important;
-    }
-
-    #menuButton {
-        position: absolute;
-        display: inline-block;
-        cursor: pointer;
-        right: 0px;
-        top: 0px;
-        width:50px;
-        height: 50px;
-        z-index:3;
-        padding-left: 7px;
-        padding-top: 5px;
-        background-color: white;
-        border-radius: 0px 0px 0px 15px
-    }
 }
 
 @media screen and (min-width: 901px) {
@@ -193,34 +158,6 @@
     padding: 8% 0 0;
     margin: auto;
   }
-
-    .fd_sidenav {
-      background: #212d3d;
-        height: 100%;
-        width: 230px;
-        z-index: 1;
-        left: 0;
-        overflow-x: hidden;
-        position: absolute;
-    }
-
-    #fd_body {
-        text-align: center;
-        position:absolute;
-        overflow: hidden;
-        top: 75px;
-        left: 230px;
-        right:0px;
-        width:auto;
-        -webkit-transition: left 1s ease-in-out;
-        -moz-transition: left 1s ease-in-out;
-        -o-transition: left 1s ease-in-out;
-        transition: left 1s ease-in-out;
-    } 
-
-    #menuButton {
-        display: none;
-    }   
 
     .fd_profile {
       font-size: 18px;
@@ -260,6 +197,23 @@
     
   }
 
+  .fd_sidenav {
+    background: #212d3d;
+      height: 100%;
+      width: 230px;
+  }
+
+  #fd_body {
+      text-align: center;
+      overflow-y: auto;
+      width:100%;
+      height: 100%;
+      -webkit-transition: left 1s ease-in-out;
+      -moz-transition: left 1s ease-in-out;
+      -o-transition: left 1s ease-in-out;
+      transition: left 1s ease-in-out;
+  } 
+
   .fd_sidenav_options p {
     cursor: default;
     display: inline-flex;
@@ -278,7 +232,9 @@
 
     .fd_sidenav_top_logo {
       width: 200px;
-      margin-left: 15px;
+      margin-left: 22px;
+      margin-top: 15px;
+      margin-bottom: 10px;
     }
 
     .fd_sidenav_top_profile {
@@ -663,4 +619,41 @@ html {
   -moz-transition: width 1s ease-in-out;
   -o-transition: width 1s ease-in-out;
   transition: width 1s ease-in-out;
+}
+
+.conditionalMove {
+  -webkit-transition: margin-left 1s ease-in-out;
+  -moz-transition: margin-left 1s ease-in-out;
+  -o-transition: margin-left 1s ease-in-out;
+  transition: margin-left 1s ease-in-out;
+}
+
+.conditionalOpacity {
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+}
+
+.fd_main {
+  display: flex;
+  height: 100%;
+}
+
+.topbody {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+body, html {
+  height: 100%;
+}
+
+#map-canvas {
+  height: 92%;
+}
+
+.fd_sidenav_options i {
+  margin-right: 10px;
 }

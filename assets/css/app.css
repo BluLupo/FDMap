@@ -693,3 +693,14 @@ body, html {
 .fd_sidenav_options i {
   margin-right: 10px;
 }
+
+#updateButtons button {
+    width: 250px;
+}
+
+.notransition {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}

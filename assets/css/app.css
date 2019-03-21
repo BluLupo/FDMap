@@ -72,6 +72,42 @@
   animation: ld-bounce 1s infinite;
 }
 
+@media screen and (max-width: 550px) {
+    #sidenav_menu {
+        width: 45px;
+    }
+
+    #fd_body {
+        left: 0px!important;
+    }
+  
+    #sidenav_top_logo {
+        margin-Left: 2px;
+    }
+
+    #maplogoright {
+        opacity : 0
+    }
+}
+
+@media screen and (min-width: 551px) {
+    #sidenav_menu {
+        width: 230px;
+    }
+
+    #fd_body {
+        left: 230px!important;
+    }
+  
+    #sidenav_top_logo {
+        margin-Left: 25px;
+    }
+
+    #maplogoright {
+        opacity : 255
+    }
+}
+
 @media screen and (max-width: 750px) {
   #fd_profile_nickname {
     padding-left: 20px;

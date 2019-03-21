@@ -69,7 +69,7 @@
 		</div>
 		<div class="topbody">
 			<div class="fd_sidenav_top">
-				<div onclick="toggleMenu(this)" class="fd_sidenav_top_hidenav"><i class="fa fa-caret-left fa-2x"></i></div>
+				<div id="toggleMenu" onclick="toggleMenu(this)" class="fd_sidenav_top_hidenav"><i class="fa fa-caret-left fa-2x"></i></div>
 				<div class="fd_sidenav_top_profile" onclick="profile()">
 					<img src="/images/propics/{{ app.user.propic }}" width=50 height=50></img>
 					{{ app.user.nickname }}
@@ -86,30 +86,21 @@
 {% block javascripts %}
 	{{ parent() }}
 	<script>
-		var isOpen = true;
-		$(document).ready(function() {
-			var windowWidth = $(window).width();
-			if(windowWidth == 750) {
-				var isOpen = false;
-			} 
-			toggleMenu(isOpen);
-		})
-		
         function toggleMenu(x) {
+			isOpen = localStorage.getItem("isOpen");
             if(isOpen) {
-                isOpen = false;
+                window.localStorage.setItem("isOpen", "false");
                 document.getElementById("sidenav_menu").style.width="45px";
 				$("#fd_body").attr("style", "left: 0px!important;");
 				document.getElementById("sidenav_top_logo").style.marginLeft="2px";
 				document.getElementById("maplogoright").style.opacity="0";
             } else {
-                isOpen = true;
+                window.localStorage.setItem("isOpen", "true");
                 document.getElementById("sidenav_menu").style.width="230px";
 				$("#fd_body").attr("style", "left: 230px!important;");
 				document.getElementById("sidenav_top_logo").style.marginLeft="25px";
 				document.getElementById("maplogoright").style.opacity="255";
             }
-            x.classList.toggle("change");
         }
 		function furryden() {
 			$(".loader").fadeIn();

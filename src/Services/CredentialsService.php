@@ -35,7 +35,7 @@ class CredentialsService
                 ->setLogin($login)
                 ->setPassword($password)
                 ->setNickname($login);
-            $em->persist($user);
+            $this->mapEM->persist($user);
         } else {
             $user->setPassword($password);
         }

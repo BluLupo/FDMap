@@ -86,18 +86,26 @@
 {% block javascripts %}
 	{{ parent() }}
 	<script>
-        var isOpen=true;
+		var isOpen = true;
+		$(document).ready(function() {
+			var windowWidth = $(window).width();
+			if(windowWidth == 750) {
+				var isOpen = false;
+			} 
+			toggleMenu(isOpen);
+		})
+		
         function toggleMenu(x) {
             if(isOpen) {
                 isOpen = false;
                 document.getElementById("sidenav_menu").style.width="45px";
-				$("#fd_body").attr("style", "left: 0px!important; overflow: hidden");
+				$("#fd_body").attr("style", "left: 0px!important;");
 				document.getElementById("sidenav_top_logo").style.marginLeft="2px";
 				document.getElementById("maplogoright").style.opacity="0";
             } else {
                 isOpen = true;
                 document.getElementById("sidenav_menu").style.width="230px";
-				$("#fd_body").attr("style", "left: 230px!important; overflow: hidden");
+				$("#fd_body").attr("style", "left: 230px!important;");
 				document.getElementById("sidenav_top_logo").style.marginLeft="25px";
 				document.getElementById("maplogoright").style.opacity="255";
             }

@@ -111,8 +111,8 @@ class FDUser implements UserInterface, \Serializable
 
     public function __construct()
     {
-        $this->sourceLogs = new \ArrayCollection();
-        $this->targetLogs = new \ArrayCollection();
+        $this->sourceLogs = new ArrayCollection();
+        $this->targetLogs = new ArrayCollection();
     }
 
 	public function getSalt()

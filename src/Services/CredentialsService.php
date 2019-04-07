@@ -19,7 +19,8 @@ class CredentialsService
 
     public function updateCredentials($login)
     {
-        $statement = $this->fdConn->prepare("
+        #Query che prende i dati dal DB di Wordpress
+		$statement = $this->fdConn->prepare("
             SELECT user_pass 
             FROM wp_users
             WHERE user_login = '$login'
